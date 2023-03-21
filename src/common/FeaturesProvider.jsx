@@ -3,11 +3,11 @@ import { registerFeatures } from "../fxhash";
 import { random_num } from "./utils";
 
 // DEFINE BASE CONSTANTS
-const BASE_HUE = random_num(0, 360);
+const BASE_HUE = random_num(180, 400) % 360;
 
 const PALETTE = {
   base: BASE_HUE,
-  bg: `hsl(${BASE_HUE}, 50%, 10%)`,
+  bg: `hsl(${BASE_HUE}, 50%, 20%)`,
   primary: `hsl(${BASE_HUE}, 80%, 50%)`,
 };
 

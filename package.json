@@ -11,9 +11,12 @@
   ],
   "main": "src/index.js",
   "dependencies": {
+    "@dimforge/rapier3d-compat": "^0.11.2",
+    "@react-three/csg": "^2.1.1",
     "@react-three/drei": "^9.57.0",
     "@react-three/fiber": "^8.11.9",
     "@react-three/postprocessing": "^2.7.0",
+    "@react-three/rapier": "0.8.2",
     "chroma-js": "^2.4.2",
     "glslify-loader": "^2.0.0",
     "lamina": "^1.1.23",
