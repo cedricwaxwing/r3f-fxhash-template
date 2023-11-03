@@ -11,7 +11,7 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@react-three/drei": "^9.57.0",
+    "@react-three/drei": "^9.88.11",
     "@react-three/fiber": "^8.11.9",
     "@react-three/postprocessing": "^2.7.0",
     "chroma-js": "^2.4.2",
