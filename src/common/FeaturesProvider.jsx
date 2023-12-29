@@ -5,7 +5,7 @@ import { random_choice } from "./utils";
 const themes = {
   primary: {
     background: "#fffaf0",
-    colors: ["#d46118", "#fbba45", "#15736a", "#035a90", "#0a0a0a"],
+    colors: ["#d46118", "#fbba45", "#15736a", "#035a90", "#2a2a2a"],
   },
 };
 
@@ -23,6 +23,7 @@ export default function FeaturesProvider({ children }) {
   const constantsData = constants();
   registerFeatures({
     theme: Object.keys(constantsData.theme)[0],
+    shapes: random_int(15, 30),
   });
 
   return (
