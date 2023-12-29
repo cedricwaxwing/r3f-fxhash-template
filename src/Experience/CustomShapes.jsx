@@ -3,19 +3,23 @@ import { useFeatures } from "../common/FeaturesProvider";
 import * as THREE from "three";
 import { random_choice, random_num } from "../common/utils";
 import { useState, useEffect } from "react";
-import { MeshTransmissionMaterial } from "@react-three/drei";
+import {
+  CubeCamera,
+  MeshReflectorMaterial,
+  MeshTransmissionMaterial,
+} from "@react-three/drei";
 
 const snapAngle = (value, snapTo) => {
   const roundedValue = Math.round(value / snapTo) * snapTo;
   return Math.abs(roundedValue) < snapTo / 2 ? snapTo : roundedValue;
 };
 
-const generateShape = (viewport) => {
+const generateShape = (vWidth, vHeight) => {
   const data = {
     position: [
-      random_num(-viewport.width / 2, viewport.width / 2),
-      random_num(-viewport.height / 2, viewport.height / 2),
-      random_num(-0.5, 0.5),
+      random_num(-vWidth / 1.8, vWidth / 1.8),
+      random_num(-vHeight / 1.8, vHeight / 1.8),
+      random_num(-0.15, 0.15),
     ],
     scale: random_num(0.5, 1.5),
     rotation: [
@@ -66,7 +70,7 @@ export default function CustomShapes() {
     let protection = 0;
 
     while (generatedShapes.length < num_shapes) {
-      const geometry = generateShape(viewport);
+      const geometry = generateShape(viewport.width, viewport.height);
       const mesh = new THREE.Mesh(geometry);
 
       let overlapping = false;
@@ -97,36 +101,60 @@ export default function CustomShapes() {
     }
 
     setShapes(generatedShapes);
-  }, [viewport, num_shapes, theme]);
+  }, [viewport.height, viewport.width, num_shapes, theme]);
 
   return (
     <>
-      {shapes.map((shape, index) => {
-        const { geometry, position, rotation, scale } = shape;
-        return (
-          <mesh
-            key={index}
-            geometry={geometry}
-            position={position}
-            rotation={rotation}
-            scale={scale}
-          >
-            {applyMaterial(random_choice(theme.colors))}
-            {/* <primitive  object={shape} /> */}
-          </mesh>
-        );
-      })}
+      <CubeCamera frames={1}>
+        {(texture) => (
+          <>
+            {shapes.map((shape, index) => {
+              const { geometry, position, rotation, scale } = shape;
+              return (
+                <mesh
+                  castShadow
+                  receiveShadow
+                  key={index}
+                  geometry={geometry}
+                  position={position}
+                  rotation={rotation}
+                  scale={scale}
+                >
+                  {applyMaterial(random_choice(theme.colors), texture)}
+                  {/* <primitive  object={shape} /> */}
+                </mesh>
+              );
+            })}
+          </>
+        )}
+      </CubeCamera>
     </>
   );
 }
 
-const applyMaterial = (color) => {
+const applyMaterial = (color, texture) => {
   const r = random_num(0, 1);
-  if (r < 0.9) {
-    return <meshStandardMaterial color={color} />;
+  if (r < 0.8) {
+    return (
+      <meshStandardMaterial
+        envMap={texture}
+        envMapIntensity={0.8}
+        color={color}
+      />
+    );
+    // } else if (r < 0.9) {
+    //   return (
+    //     <MeshReflectorMaterial
+    //       envMapIntensity={0.8}
+    //       envMap={texture}
+    //       // color={color}
+    //     />
+    //   );
   } else {
     return (
       <MeshTransmissionMaterial
+        envMap={texture}
+        envMapIntensity={0.8}
         color="#fff"
         ior={1.33}
         thickness={2}
