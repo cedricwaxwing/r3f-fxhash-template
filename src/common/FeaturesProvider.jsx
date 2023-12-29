@@ -14,6 +14,7 @@ export const constants = () => {
   return {
     theme: themes[choice],
     name: choice,
+    num_shapes: random_int(10, 20),
   };
 };
 
@@ -23,7 +24,6 @@ export default function FeaturesProvider({ children }) {
   const constantsData = constants();
   registerFeatures({
     theme: Object.keys(constantsData.theme)[0],
-    shapes: random_int(15, 30),
   });
 
   return (
