@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, memo } from "react";
 import { useThree } from "@react-three/fiber";
 import { useFeatures } from "../common/FeaturesProvider";
 import * as THREE from "three";
@@ -63,13 +63,21 @@ const generateShape = (vWidth, vHeight) => {
   return shapeGeometry;
 };
 
-export default function CustomShapes() {
+const CustomShapes = () => {
   const { viewport } = useThree();
-  const { num_shapes, theme } = useFeatures();
+  const features = useFeatures();
   const [shapes, setShapes] = useState([]);
+  const [materialConfig, setMaterialConfig] = useState({
+    colors: [],
+    seeds: [],
+  });
+
+  const { num_shapes, theme } = features;
 
   useEffect(() => {
     const generatedShapes = [];
+    const generatedColors = [];
+    const genereatedSeeds = [];
     let protection = 0;
 
     while (generatedShapes.length < num_shapes) {
@@ -92,6 +100,8 @@ export default function CustomShapes() {
 
       if (!overlapping) {
         generatedShapes.push(mesh);
+        generatedColors.push(random_choice(theme.colors));
+        genereatedSeeds.push(random_num(0, 1));
       }
 
       protection++;
@@ -103,6 +113,7 @@ export default function CustomShapes() {
       }
     }
 
+    setMaterialConfig({ colors: generatedColors, seeds: genereatedSeeds });
     setShapes(generatedShapes);
   }, [viewport.height, viewport.width, num_shapes, theme]);
 
@@ -123,8 +134,11 @@ export default function CustomShapes() {
                   rotation={rotation}
                   scale={scale}
                 >
-                  {applyMaterial(random_choice(theme.colors), texture)}
-                  {/* <primitive  object={shape} /> */}
+                  <Material
+                    color={materialConfig.colors[index]}
+                    texture={texture}
+                    seed={materialConfig.seeds[index]}
+                  />
                 </mesh>
               );
             })}
@@ -133,11 +147,12 @@ export default function CustomShapes() {
       </CubeCamera>
     </>
   );
-}
+};
 
-const applyMaterial = (color, texture) => {
-  const r = random_num(0, 1);
-  if (r < 0.8) {
+export default memo(CustomShapes);
+
+const Material = ({ color, texture, seed }) => {
+  if (seed < 0.8) {
     return (
       <meshStandardMaterial
         envMap={texture}
@@ -145,14 +160,6 @@ const applyMaterial = (color, texture) => {
         color={color}
       />
     );
-    // } else if (r < 0.9) {
-    //   return (
-    //     <MeshReflectorMaterial
-    //       envMapIntensity={0.8}
-    //       envMap={texture}
-    //       // color={color}
-    //     />
-    //   );
   } else {
     return (
       <MeshTransmissionMaterial
