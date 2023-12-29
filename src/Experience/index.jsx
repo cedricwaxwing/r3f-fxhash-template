@@ -1,38 +1,16 @@
-import { memo, Suspense } from "react";
+import { OrbitControls } from "@react-three/drei";
+import CustomShape from "./CustomShape";
 import { Canvas } from "@react-three/fiber";
-import { Box, Environment, OrbitControls } from "@react-three/drei";
-import { useFeatures } from "../common/FeaturesProvider";
-import { Perf } from "r3f-perf";
 
-const Experience = () => {
-  const { palette } = useFeatures();
-
+function Experience() {
   return (
-    <>
-      <Canvas
-        id="fxhash-canvas"
-        shadows
-        camera={{ position: [2, 2, 2], fov: 50 }}
-        performace={{
-          min: 0.2,
-        }}
-        dpr={[1, 2]}
-        gl={{
-          preserveDrawingBuffer: true,
-        }}
-      >
-        <Suspense fallback={null}>
-          <Environment preset="sunset" />
-          <color attach="background" args={[palette.bg]} />
-          <Box>
-            <meshStandardMaterial color={palette.primary} />
-          </Box>
-          <OrbitControls />
-        </Suspense>
-        <Perf position="top-left" />
-      </Canvas>
-    </>
+    <Canvas camera={{ fov: 8, position: [0, 0, 40] }}>
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} />
+      <CustomShape />
+      <OrbitControls />
+    </Canvas>
   );
-};
+}
 
-export default memo(Experience);
+export default Experience;
