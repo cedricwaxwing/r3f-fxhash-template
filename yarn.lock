@@ -6873,7 +6873,7 @@ ktx-parse@^0.4.5:
 
 lamina@^1.1.22, lamina@^1.1.23:
   version "1.1.23"
-  resolved "https://registry.npmjs.org/lamina/-/lamina-1.1.23.tgz"
+  resolved "https://registry.yarnpkg.com/lamina/-/lamina-1.1.23.tgz#0f9e64e8901bedd39d490325fb331d46605f2aa8"
   integrity sha512-sxcoOyws9fK73tHJFsXgZlIJho++nf+FwWzpbvAheUvayl30DyJmPd0U0Q6v/ECcJuuujb7Txcr4SLOZrdDPJA==
   dependencies:
     glsl-token-descope "^1.0.2"

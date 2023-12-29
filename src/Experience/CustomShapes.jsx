@@ -1,13 +1,9 @@
-import { useMemo, useState, useEffect, memo } from "react";
+import { useState, useEffect, memo } from "react";
 import { useThree } from "@react-three/fiber";
 import { useFeatures } from "../common/FeaturesProvider";
 import * as THREE from "three";
 import { random_choice, random_num } from "../common/utils";
-import {
-  CubeCamera,
-  MeshReflectorMaterial,
-  MeshTransmissionMaterial,
-} from "@react-three/drei";
+import { MeshTransmissionMaterial } from "@react-three/drei";
 
 const snapAngle = (value, snapTo) => {
   const roundedValue = Math.round(value / snapTo) * snapTo;
@@ -63,7 +59,7 @@ const generateShape = (vWidth, vHeight) => {
   return shapeGeometry;
 };
 
-const CustomShapes = () => {
+const CustomShapes = ({ texture }) => {
   const { viewport } = useThree();
   const features = useFeatures();
   const [shapes, setShapes] = useState([]);
@@ -119,32 +115,26 @@ const CustomShapes = () => {
 
   return (
     <>
-      <CubeCamera frames={1}>
-        {(texture) => (
-          <>
-            {shapes.map((shape, index) => {
-              const { geometry, position, rotation, scale } = shape;
-              return (
-                <mesh
-                  castShadow
-                  receiveShadow
-                  key={index}
-                  geometry={geometry}
-                  position={position}
-                  rotation={rotation}
-                  scale={scale}
-                >
-                  <Material
-                    color={materialConfig.colors[index]}
-                    texture={texture}
-                    seed={materialConfig.seeds[index]}
-                  />
-                </mesh>
-              );
-            })}
-          </>
-        )}
-      </CubeCamera>
+      {shapes.map((shape, index) => {
+        const { geometry, position, rotation, scale } = shape;
+        return (
+          <mesh
+            castShadow
+            receiveShadow
+            key={index}
+            geometry={geometry}
+            position={position}
+            rotation={rotation}
+            scale={scale}
+          >
+            <Material
+              color={materialConfig.colors[index]}
+              texture={texture}
+              seed={materialConfig.seeds[index]}
+            />
+          </mesh>
+        );
+      })}
     </>
   );
 };

@@ -1,18 +1,16 @@
-import { Environment, OrbitControls, SoftShadows } from "@react-three/drei";
+import { CubeCamera, OrbitControls, SoftShadows } from "@react-three/drei";
 import CustomShapes from "./CustomShapes";
-import { Canvas } from "@react-three/fiber";
+import Plant from "./Plant";
+import { RGBELoader } from "three-stdlib";
+import { Canvas, useLoader } from "@react-three/fiber";
 import { useFeatures } from "../common/FeaturesProvider";
-import { useControls } from "leva";
+import art_studio from "../assets/hdri/art_studio_1k.hdr";
 
 function Experience() {
   const { theme, name } = useFeatures();
-  console.log(name);
-  const { enabled, ...config } = useControls({
-    enabled: true,
-    size: { value: 25, min: 0, max: 100 },
-    focus: { value: 0.88, min: 0, max: 2 },
-    samples: { value: 16, min: 1, max: 20, step: 1 },
-  });
+  const texture = useLoader(RGBELoader, art_studio);
+
+  console.log(name, texture);
   return (
     <Canvas shadows camera={{ fov: 8, position: [15, 15, 30] }}>
       <ambientLight intensity={0.5} />
@@ -30,8 +28,15 @@ function Experience() {
         />
       </directionalLight>
       <color attach="background" args={[theme.background]} />
-      <CustomShapes />
-      {enabled && <SoftShadows {...config} />}
+      <CubeCamera frames={1} envMap={texture} resolution={1024}>
+        {(texture) => (
+          <>
+            <CustomShapes texture={texture} />
+            <Plant texture={texture} />
+          </>
+        )}
+      </CubeCamera>
+      <SoftShadows size={24} focus={0.88} samples={16} />
       <OrbitControls />
     </Canvas>
   );
