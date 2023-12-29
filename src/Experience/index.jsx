@@ -13,7 +13,7 @@ function Experience() {
   console.log(name, texture);
   return (
     <Canvas shadows camera={{ fov: 8, position: [15, 15, 30] }}>
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={1} />
       <pointLight position={[10, 7, 10]} />
       <directionalLight
         castShadow

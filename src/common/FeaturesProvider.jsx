@@ -34,7 +34,7 @@ export const constants = () => {
   return {
     theme: themes[choice],
     name: choice,
-    num_shapes: random_int(8, 15),
+    num_shapes: random_int(8, 19),
   };
 };
 

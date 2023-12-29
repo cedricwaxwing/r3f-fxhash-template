@@ -3,9 +3,11 @@ import * as THREE from "three";
 import svgToShape from "../../common/svgToShape";
 import Leaf1 from "../../assets/plants/pothos/leaf_1.svg";
 import { Color, Displace, Gradient, LayerMaterial, Noise } from "lamina";
+import { useTexture } from "@react-three/drei";
 
 const PothosLeaf = ({ extrusion }) => {
   const [leafGeometry, setLeafGeometry] = useState(null);
+  const texture = useTexture("../../assets/plants/pothos/");
 
   useEffect(() => {
     svgToShape(Leaf1, setLeafGeometry, extrusion);
@@ -16,7 +18,7 @@ const PothosLeaf = ({ extrusion }) => {
   }
 
   return (
-    <group>
+    <group scale={5} rotation-y={Math.PI / 4} position={[-2, -3, 0]}>
       <mesh geometry={leafGeometry}>
         <LayerMaterial lighting="standard" roughness={0.9}>
           {/* <Displace strength={0.1} /> */}

@@ -3,7 +3,7 @@ import { useThree } from "@react-three/fiber";
 import { useFeatures } from "../common/FeaturesProvider";
 import * as THREE from "three";
 import { random_choice, random_num } from "../common/utils";
-import { MeshTransmissionMaterial } from "@react-three/drei";
+import { Float, MeshTransmissionMaterial } from "@react-three/drei";
 
 const snapAngle = (value, snapTo) => {
   const roundedValue = Math.round(value / snapTo) * snapTo;
@@ -118,21 +118,27 @@ const CustomShapes = ({ texture }) => {
       {shapes.map((shape, index) => {
         const { geometry, position, rotation, scale } = shape;
         return (
-          <mesh
-            castShadow
-            receiveShadow
+          <Float
             key={index}
-            geometry={geometry}
-            position={position}
-            rotation={rotation}
-            scale={scale}
+            floatIntensity={0.8}
+            speed={0.5}
+            rotationIntensity={0}
           >
-            <Material
-              color={materialConfig.colors[index]}
-              texture={texture}
-              seed={materialConfig.seeds[index]}
-            />
-          </mesh>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={geometry}
+              position={position}
+              rotation={rotation}
+              scale={scale}
+            >
+              <Material
+                color={materialConfig.colors[index]}
+                texture={texture}
+                seed={materialConfig.seeds[index]}
+              />
+            </mesh>
+          </Float>
         );
       })}
     </>

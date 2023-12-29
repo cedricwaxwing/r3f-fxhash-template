@@ -1,16 +1,29 @@
-import PothosLeaf from "./PothosLeaf";
-import { useControls } from "leva";
+import HopLeaf from "./HopLeaf";
+import { random_num } from "../../common/utils";
 
 export default function Plant() {
-  const extrusionConfig = useControls({
-    steps: { value: 2.0, min: 0, max: 10 },
-    depth: { value: 0.01, min: 0, max: 10 },
-    bevelEnabled: false,
-    // bevelThickness: { value: 0.01, min: 0, max: 10 },
-    // bevelSize: { value: 0.01, min: 0, max: 10 },
-    // bevelOffset: { value: 0, min: 0, max: 10 },
-    // bevelSegments: { value: 2, min: 0, max: 10 },
-  });
+  const hopLeaves = [];
 
-  return <PothosLeaf extrusion={extrusionConfig} />;
+  {
+    [...Array(60)].map((_, i) => {
+      const leaf = {
+        position: [random_num(-7, 7), random_num(-3, 3), random_num(-7, 3)],
+        scale: random_num(0.1, 0.5),
+        rotation: [
+          random_num(-Math.PI * 2, Math.PI * 2),
+          random_num(-Math.PI * 2, Math.PI * 2),
+          random_num(-Math.PI * 2, Math.PI * 2),
+        ],
+      };
+      hopLeaves.push(leaf);
+    });
+  }
+
+  return (
+    <>
+      {hopLeaves.map((leaf, i) => {
+        return <HopLeaf key={i} {...leaf} />;
+      })}
+    </>
+  );
 }
