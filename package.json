@@ -17,7 +17,7 @@
     "chroma-js": "^2.4.2",
     "glslify-loader": "^2.0.0",
     "lamina": "^1.1.23",
-    "leva": "0.9.34",
+    "leva": "^0.9.35",
     "r3f-perf": "7.1.2",
     "raw-loader": "^4.0.2",
     "react": "18.2.0",

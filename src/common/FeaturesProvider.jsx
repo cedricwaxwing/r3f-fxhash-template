@@ -3,30 +3,30 @@ import { registerFeatures } from "../fxhash";
 import { random_choice, random_int } from "./utils";
 
 const themes = {
-  primary: {
-    background: "#fffaf0",
-    colors: ["#d46118", "#fbba45", "#15736a", "#035a90", "#2a2a2a"],
-  },
+  // primary: {
+  //   background: "#fffaf0",
+  //   colors: ["#d46118", "#fbba45", "#15736a", "#035a90", "#2a2a2a"],
+  // },
   darkPalette: {
     background: "#2c3e50",
     colors: ["#e74c3c", "#f1c40f", "#2ecc71", "#3498db", "#e67e22"],
   },
-  oceanBreeze: {
-    background: "#97cbe0",
-    colors: ["#5b3c72", "#009496", "#1f3175", "#1E90FF", "#215521"],
-  },
-  sunsetSerenity: {
-    background: "#fcf4d6",
-    colors: ["#FF6B6B", "#d3b301", "#FFA07A", "#FF8C00", "#DC143C"],
-  },
-  mysticForest: {
-    background: "#354F52",
-    colors: ["#5D737E", "#6A9171", "#ABCEA3", "#5d74dc", "#FFD151"],
-  },
-  desertMirage: {
-    background: "#FFE4C4",
-    colors: ["#91744e", "#CD853F", "#F0E68C", "#FF6347", "#A0522D"],
-  },
+  // oceanBreeze: {
+  //   background: "#97cbe0",
+  //   colors: ["#5b3c72", "#009496", "#1f3175", "#1E90FF", "#215521"],
+  // },
+  // sunsetSerenity: {
+  //   background: "#fcf4d6",
+  //   colors: ["#FF6B6B", "#d3b301", "#FFA07A", "#FF8C00", "#DC143C"],
+  // },
+  // mysticForest: {
+  //   background: "#354F52",
+  //   colors: ["#5D737E", "#6A9171", "#ABCEA3", "#5d74dc", "#FFD151"],
+  // },
+  // desertMirage: {
+  //   background: "#FFE4C4",
+  //   colors: ["#91744e", "#CD853F", "#F0E68C", "#FF6347", "#A0522D"],
+  // },
 };
 
 export const constants = () => {
@@ -34,7 +34,7 @@ export const constants = () => {
   return {
     theme: themes[choice],
     name: choice,
-    num_shapes: random_int(10, 20),
+    num_shapes: random_int(8, 15),
   };
 };
 

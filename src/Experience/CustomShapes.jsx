@@ -1,8 +1,8 @@
+import { useMemo, useState, useEffect } from "react";
 import { useThree } from "@react-three/fiber";
 import { useFeatures } from "../common/FeaturesProvider";
 import * as THREE from "three";
 import { random_choice, random_num } from "../common/utils";
-import { useState, useEffect } from "react";
 import {
   CubeCamera,
   MeshReflectorMaterial,
@@ -21,7 +21,7 @@ const generateShape = (vWidth, vHeight) => {
       random_num(-vHeight / 1.8, vHeight / 1.8),
       random_num(-0.15, 0.15),
     ],
-    scale: random_num(0.5, 1.5),
+    scale: random_num(0.85, 1.15),
     rotation: [
       snapAngle(random_num(-Math.PI * 2, Math.PI * 2), Math.PI / 4),
       snapAngle(random_num(-Math.PI * 2, Math.PI * 2), Math.PI / 4),
@@ -30,8 +30,8 @@ const generateShape = (vWidth, vHeight) => {
   };
 
   const depth = random_num(0.1, 0.5);
-  const height = random_num(0.5, 5);
-  const width = random_num(0.5, 5);
+  const height = random_num(0.5, 4);
+  const width = random_num(0.5, 4);
   const lShape = new THREE.Shape();
   lShape.moveTo(0, 0);
   lShape.lineTo(0, height);
@@ -44,7 +44,10 @@ const generateShape = (vWidth, vHeight) => {
   const shapeGeometry = new THREE.ExtrudeGeometry(lShape, {
     steps: 2,
     depth: depth,
-    bevelEnabled: false,
+    bevelEnabled: true,
+    bevelSegments: 4,
+    bevelSize: 0.02,
+    bevelThickness: 0.02,
   });
 
   // Apply position and rotation transformations to the geometry
@@ -160,7 +163,7 @@ const applyMaterial = (color, texture) => {
         thickness={2}
         backside
         backsideThickness={0.3}
-        distortion={0.6}
+        distortion={0.1}
         distortionScale={0.3}
         chromaticAberration={30}
       />
