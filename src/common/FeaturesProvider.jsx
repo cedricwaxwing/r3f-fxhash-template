@@ -1,30 +1,32 @@
 import { createContext, useContext } from "react";
 import { registerFeatures } from "../fxhash";
-import { random_num } from "./utils";
+import { random_choice } from "./utils";
 
-// DEFINE BASE CONSTANTS
-const BASE_HUE = random_num(0, 360);
-
-const PALETTE = {
-  base: BASE_HUE,
-  bg: `hsl(${BASE_HUE}, 50%, 10%)`,
-  primary: `hsl(${BASE_HUE}, 80%, 50%)`,
+const themes = {
+  primary: {
+    background: "#fffaf0",
+    colors: ["#d46118", "#fbba45", "#15736a", "#035a90", "#0a0a0a"],
+  },
 };
 
-export const constants = {
-  palette: PALETTE,
+export const constants = () => {
+  const choice = random_choice(Object.keys(themes));
+  return {
+    theme: themes[choice],
+    name: choice,
+  };
 };
 
 const FeaturesContext = createContext();
 
 export default function FeaturesProvider({ children }) {
-  // REGISTER TOKEN FEATURES
+  const constantsData = constants();
   registerFeatures({
-    primary: PALETTE.primary.name,
+    theme: Object.keys(constantsData.theme)[0],
   });
 
   return (
-    <FeaturesContext.Provider value={constants}>
+    <FeaturesContext.Provider value={constantsData}>
       {children}
     </FeaturesContext.Provider>
   );

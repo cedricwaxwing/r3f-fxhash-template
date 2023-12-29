@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import * as THREE from "three";
-import { random_num } from "../common/utils";
+import { random_choice, random_num } from "../common/utils";
 import { useFeatures } from "../common/FeaturesProvider";
 
 function CustomShape() {
-  const { palette } = useFeatures();
+  const { theme } = useFeatures();
   const depth = random_num(0.1, 0.5);
   const shape = useMemo(() => {
     const verticalLength = random_num(0.5, 2);
@@ -54,7 +54,7 @@ function CustomShape() {
 
   return (
     <mesh geometry={geometry} {...data}>
-      <meshStandardMaterial color={palette.primary} />
+      <meshStandardMaterial color={random_choice(theme.colors)} />
     </mesh>
   );
 }
