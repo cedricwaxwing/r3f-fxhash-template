@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import { registerFeatures } from "../fxhash";
-import { random_choice } from "./utils";
+import { random_choice, random_int } from "./utils";
 
 const themes = {
   primary: {
