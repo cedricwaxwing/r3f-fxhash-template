@@ -1,7 +1,7 @@
 import HopLeaf from "./HopLeaf";
 import { random_num } from "../../common/utils";
 
-export default function Plant() {
+export default function Plant({ texture }) {
   const hopLeaves = [];
 
   {
@@ -22,7 +22,7 @@ export default function Plant() {
   return (
     <>
       {hopLeaves.map((leaf, i) => {
-        return <HopLeaf key={i} {...leaf} />;
+        return <HopLeaf key={i} texture={texture} {...leaf} />;
       })}
     </>
   );

@@ -5,16 +5,17 @@ import { RGBELoader } from "three-stdlib";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { useFeatures } from "../common/FeaturesProvider";
 import art_studio from "../assets/hdri/art_studio_1k.hdr";
+import { Perf } from "r3f-perf";
 
 function Experience() {
   const { theme, name } = useFeatures();
   const texture = useLoader(RGBELoader, art_studio);
 
-  console.log(name, texture);
+  console.log(name);
   return (
     <Canvas shadows camera={{ fov: 8, position: [15, 15, 30] }}>
-      <ambientLight intensity={1} />
-      <pointLight position={[10, 7, 10]} />
+      <ambientLight intensity={8} color={theme.background} />
+      <pointLight position={[10, 7, 10]} color={theme.background} />
       <directionalLight
         castShadow
         position={[2.5, 8, 5]}
@@ -38,6 +39,7 @@ function Experience() {
       </CubeCamera>
       <SoftShadows size={24} focus={0.88} samples={16} />
       <OrbitControls />
+      <Perf />
     </Canvas>
   );
 }
