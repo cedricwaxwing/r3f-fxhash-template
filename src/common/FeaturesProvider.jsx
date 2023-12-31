@@ -11,6 +11,14 @@ const themes = {
     background: "#2c3e50",
     colors: ["#e74c3c", "#f1c40f", "#2ecc71", "#3498db", "#e67e22"],
   },
+  floralDelicacy: {
+    background: "#413732",
+    colors: ["#f38169", "#74c5bf", "#d3aa87", "#ffa952", "#9b5672"],
+  },
+  strawberryTheif: {
+    background: "#292323",
+    colors: ["#db994d", "#fc6141", "#9ca4bd", "#fcceaa", "#8db579"],
+  },
   // oceanBreeze: {
   //   background: "#97cbe0",
   //   colors: ["#5b3c72", "#009496", "#1f3175", "#1E90FF", "#215521"],
@@ -34,7 +42,7 @@ export const constants = () => {
   return {
     theme: themes[choice],
     name: choice,
-    num_shapes: random_int(8, 19),
+    num_shapes: random_int(8, 14),
   };
 };
 

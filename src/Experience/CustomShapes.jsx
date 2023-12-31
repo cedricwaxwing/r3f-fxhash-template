@@ -63,55 +63,70 @@ const CustomShapes = ({ texture }) => {
   const { viewport } = useThree();
   const features = useFeatures();
   const [shapes, setShapes] = useState([]);
-  const [materialConfig, setMaterialConfig] = useState({
+  const [rendered, setRendered] = useState(false);
+  const [shapeConfig, setShapeConfig] = useState({
     colors: [],
     seeds: [],
+    speeds: [],
+    intensitys: [],
   });
 
   const { num_shapes, theme } = features;
 
   useEffect(() => {
-    const generatedShapes = [];
-    const generatedColors = [];
-    const genereatedSeeds = [];
-    let protection = 0;
+    if (!rendered) {
+      const generatedShapes = [];
+      const generatedColors = [];
+      const genereatedSeeds = [];
+      const genereatedSpeeds = [];
+      const genereatedIntensitys = [];
+      let protection = 0;
 
-    while (generatedShapes.length < num_shapes) {
-      const geometry = generateShape(viewport.width, viewport.height);
-      const mesh = new THREE.Mesh(geometry);
+      while (generatedShapes.length < num_shapes) {
+        const geometry = generateShape(viewport.width, viewport.height);
+        const mesh = new THREE.Mesh(geometry);
 
-      let overlapping = false;
-      for (let i = 0; i < generatedShapes.length; i++) {
-        const existingShape = generatedShapes[i];
-        existingShape.geometry.computeBoundingBox(); // Compute bounding box for existing shape
-        if (
-          mesh.geometry.boundingBox.intersectsBox(
-            existingShape.geometry.boundingBox
-          )
-        ) {
-          overlapping = true;
+        let overlapping = false;
+        for (let i = 0; i < generatedShapes.length; i++) {
+          const existingShape = generatedShapes[i];
+          existingShape.geometry.computeBoundingBox(); // Compute bounding box for existing shape
+          if (
+            mesh.geometry.boundingBox.intersectsBox(
+              existingShape.geometry.boundingBox
+            )
+          ) {
+            overlapping = true;
+            break;
+          }
+        }
+
+        if (!overlapping) {
+          generatedShapes.push(mesh);
+          generatedColors.push(random_choice(theme.colors));
+          genereatedSeeds.push(random_num(0, 1));
+          genereatedSpeeds.push(random_num(0, 1));
+          genereatedIntensitys.push(random_num(0.5, 3));
+        }
+
+        protection++;
+        if (protection > 1000) {
+          console.error(
+            "Protection limit reached. Consider increasing the viewport size or decreasing num_shapes."
+          );
           break;
         }
       }
 
-      if (!overlapping) {
-        generatedShapes.push(mesh);
-        generatedColors.push(random_choice(theme.colors));
-        genereatedSeeds.push(random_num(0, 1));
-      }
-
-      protection++;
-      if (protection > 1000) {
-        console.error(
-          "Protection limit reached. Consider increasing the viewport size or decreasing num_shapes."
-        );
-        break;
-      }
+      setShapeConfig({
+        colors: generatedColors,
+        seeds: genereatedSeeds,
+        speeds: genereatedSpeeds,
+        intensitys: genereatedIntensitys,
+      });
+      setShapes(generatedShapes);
+      setRendered(true);
     }
-
-    setMaterialConfig({ colors: generatedColors, seeds: genereatedSeeds });
-    setShapes(generatedShapes);
-  }, [viewport.height, viewport.width, num_shapes, theme]);
+  }, [viewport.height, viewport.width, num_shapes, theme, rendered]);
 
   return (
     <>
@@ -120,8 +135,8 @@ const CustomShapes = ({ texture }) => {
         return (
           <Float
             key={index}
-            floatIntensity={0.8}
-            speed={0.5}
+            floatIntensity={shapeConfig.intensitys[index]}
+            speed={shapeConfig.speeds[index]}
             rotationIntensity={0}
           >
             <mesh
@@ -133,9 +148,9 @@ const CustomShapes = ({ texture }) => {
               scale={scale}
             >
               <Material
-                color={materialConfig.colors[index]}
+                color={shapeConfig.colors[index]}
                 texture={texture}
-                seed={materialConfig.seeds[index]}
+                seed={shapeConfig.seeds[index]}
               />
             </mesh>
           </Float>

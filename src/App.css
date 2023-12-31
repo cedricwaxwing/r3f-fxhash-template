@@ -1,9 +1,12 @@
 .App {
   margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 100vh;
+  padding: 24px;
+  width: calc(100vw - 48px);
+  height: calc(100vh - 48px);;
   overflow: clip;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 body > iframe {
