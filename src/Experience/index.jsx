@@ -28,8 +28,8 @@ function Experience() {
         position: "relative",
         aspectRatio: "5/7",
         maxWidth: "calc(90vh * 5/7)",
-        border: "1vmin solid #fff",
-        boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+        border: "1.5vmin solid #e0dfdf",
+        boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.5)",
         backgroundColor: theme.background,
       }}
     >
