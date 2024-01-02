@@ -1,17 +1,17 @@
 export function fxhash(): string {
-  return (window as any).fxhash;
+  return window.$fx.hash;
 }
 
 export function fxrand(): number {
-  return (window as any).fxrand();
+  return window.$fx.rand();
 }
 
 export function registerFeatures(features: {
   [key: string]: string | number | boolean;
 }) {
-  (window as any).$fxhashFeatures = features;
+  window.$fx.features(features);
 }
 
 export function fxpreview(): () => void {
-  return (window as any).fxpreview();
+  return window.$fx.preview;
 }

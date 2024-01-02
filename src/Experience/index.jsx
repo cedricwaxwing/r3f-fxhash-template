@@ -1,5 +1,4 @@
 import { CubeCamera, SoftShadows } from "@react-three/drei";
-import Plant from "./Plant";
 import { RGBELoader } from "three-stdlib";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { useFeatures } from "../common/FeaturesProvider";
@@ -7,12 +6,18 @@ import art_studio from "../assets/hdri/art_studio_1k.hdr";
 import { random_choice } from "../common/utils";
 import CubeGrid from "./CubeGrid";
 import CameraAnimation from "./CameraAnimation";
+import { useEffect } from "react";
+import HopLeaves from "./HopLeaves";
+import LotusLeaves from "./Lotuses";
+import { Perf } from "r3f-perf";
 
 function Experience() {
-  const { theme, name } = useFeatures();
+  const { theme } = useFeatures();
   const texture = useLoader(RGBELoader, art_studio);
 
-  console.log(name);
+  useEffect(() => {
+    console.log("Features:", window.$fx.getFeatures());
+  }, []);
 
   return (
     <div
@@ -44,8 +49,13 @@ function Experience() {
       >
         <ambientLight intensity={0.7} color={random_choice(theme.colors)} />
         <pointLight
-          intensity={0.5}
-          position={[10, 7, 10]}
+          intensity={0.9}
+          position={[10, 100, 10]}
+          color={random_choice(theme.colors)}
+        />
+        <pointLight
+          intensity={3}
+          position={[100, 10, 10]}
           color={random_choice(theme.colors)}
         />
         <directionalLight
@@ -65,12 +75,14 @@ function Experience() {
           {(texture) => (
             <>
               <CubeGrid texture={texture} />
-              <Plant texture={texture} />
+              <HopLeaves texture={texture} />
+              <LotusLeaves texture={texture} />
             </>
           )}
         </CubeCamera>
         <SoftShadows size={24} focus={0.88} samples={16} />
         <CameraAnimation />
+        {process.env.NODE_ENV === "development" && <Perf />}
       </Canvas>
     </div>
   );

@@ -19,20 +19,12 @@ const Cube = ({ position, scale }) => {
     }
   }, [color]);
 
-  return (
-    <Instance
-      castShadow
-      receiveShadow
-      ref={instanceRef}
-      position={position}
-      scale={scale}
-    />
-  );
+  return <Instance ref={instanceRef} position={position} scale={scale} />;
 };
 
 const height = 8;
 const depth = 4;
-const exponent = random_num(1, 2);
+const exponent = random_num(1.2, 2.4);
 const precomputedX = Array.from(
   { length: depth * 2 },
   (_, i) => Math.sign(i - depth) * Math.pow(Math.abs(i - depth), exponent)
@@ -47,13 +39,8 @@ const precomputedZ = Array.from(
 );
 
 const CubeGrid = ({ texture }) => {
-  const roundedBoxGeo = new RoundedBoxGeometry(
-    1,
-    1,
-    1,
-    1,
-    random_num(0.01, 0.1)
-  );
+  const b = random_num(0.01, 0.1);
+  const roundedBoxGeo = new RoundedBoxGeometry(1, 1, 1, 1, b);
 
   const standardMaterial = (
     <meshStandardMaterial
@@ -70,18 +57,20 @@ const CubeGrid = ({ texture }) => {
       backside={true}
       backsideThickness={2.3}
       thickness={2.3}
+      distortion={1.5}
       envMapIntensity={0.9}
       roughness={0.1}
       color={"#fff"}
     />
   );
   const cubes = [[], [], [], []];
+  const visible = random_num(0.35, 0.6);
 
   for (let x = -depth; x < depth; x++) {
     for (let y = -height; y < height; y++) {
       for (let z = -depth; z < depth; z++) {
         const seed = random_num(0, 1);
-        const scale = random_bool(0.5) ? random_num(0.5, 0.95) : 0.95;
+        const scale = random_num(0.35, 0.999);
         const adjustedX = precomputedX[x + depth];
         const adjustedY = precomputedY[y + height];
         const adjustedZ = precomputedZ[z + depth];
@@ -93,13 +82,13 @@ const CubeGrid = ({ texture }) => {
             scale={scale}
           />
         );
-        if (seed < 0.2) {
+        if (seed < (visible / 4) * 1) {
           cubes[0].push(cube);
-        } else if (seed < 0.35) {
+        } else if (seed < (visible / 4) * 2) {
           cubes[1].push(cube);
-        } else if (seed < 0.55) {
+        } else if (seed < (visible / 4) * 3) {
           cubes[2].push(cube);
-        } else if (seed < 0.7) {
+        } else if (seed < (visible / 4) * 4) {
           cubes[3].push(cube);
         }
       }
@@ -108,21 +97,31 @@ const CubeGrid = ({ texture }) => {
 
   return (
     <>
-      <Instances range={cubes[0].length}>
+      <Instances castShadow receiveShadow range={cubes[0].length}>
         <sphereGeometry args={[0.4, 48, 48]} />
         {standardMaterial}
         {cubes[0].map((cube, i) => cube)}
       </Instances>
-      <Instances range={cubes[1].length} geometry={roundedBoxGeo}>
+      <Instances
+        castShadow
+        receiveShadow
+        range={cubes[1].length}
+        geometry={roundedBoxGeo}
+      >
         {transmissionMaterial}
         {cubes[1].map((cube, i) => cube)}
       </Instances>
-      <Instances range={cubes[2].length}>
+      <Instances castShadow receiveShadow range={cubes[2].length}>
         <sphereGeometry args={[0.4, 48, 48]} />
         {transmissionMaterial}
         {cubes[2].map((cube, i) => cube)}
       </Instances>
-      <Instances range={cubes[3].length} geometry={roundedBoxGeo}>
+      <Instances
+        castShadow
+        receiveShadow
+        range={cubes[3].length}
+        geometry={roundedBoxGeo}
+      >
         {standardMaterial}
         {cubes[3].map((cube, i) => cube)}
       </Instances>

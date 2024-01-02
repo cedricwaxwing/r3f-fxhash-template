@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "src/lib"  ]
+, "src/lib", "fxhash.d.ts"  ]
 }

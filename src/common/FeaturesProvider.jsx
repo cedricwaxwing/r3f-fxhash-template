@@ -7,15 +7,15 @@ const themes = {
   //   background: "#fffaf0",
   //   colors: ["#d46118", "#fbba45", "#15736a", "#035a90", "#2a2a2a"],
   // },
-  darkPalette: {
+  Nightfall: {
     background: "#2c3e50",
     colors: ["#e74c3c", "#f1c40f", "#2ecc71", "#3498db", "#e67e22"],
   },
-  floralDelicacy: {
+  "Floral Delicacy": {
     background: "#413732",
     colors: ["#f38169", "#74c5bf", "#d3aa87", "#ffa952", "#9b5672"],
   },
-  strawberryTheif: {
+  "Strawberry Theif": {
     background: "#292323",
     colors: ["#db994d", "#fc6141", "#9ca4bd", "#fcceaa", "#8db579"],
   },
@@ -37,8 +37,8 @@ const themes = {
   // },
 };
 
+const choice = random_choice(Object.keys(themes));
 export const constants = () => {
-  const choice = random_choice(Object.keys(themes));
   return {
     theme: themes[choice],
     name: choice,
@@ -52,7 +52,7 @@ const FeaturesContext = createContext();
 export default function FeaturesProvider({ children }) {
   const constantsData = constants();
   registerFeatures({
-    theme: Object.keys(constantsData.theme)[0],
+    theme: choice,
   });
 
   return (
