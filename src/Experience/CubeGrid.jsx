@@ -7,7 +7,6 @@ import { useFeatures } from "../common/FeaturesProvider";
 import { random_bool, random_choice, random_num } from "../common/utils";
 import { useEffect, useMemo, useRef } from "react";
 import { RoundedBoxGeometry } from "three-stdlib";
-import { useFrame } from "@react-three/fiber";
 
 const Cube = ({ position, scale }) => {
   const instanceRef = useRef();

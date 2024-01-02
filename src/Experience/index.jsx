@@ -9,7 +9,7 @@ import CubeGrid from "./CubeGrid";
 import CameraAnimation from "./CameraAnimation";
 
 function Experience() {
-  const { theme, name, grid } = useFeatures();
+  const { theme, name } = useFeatures();
   const texture = useLoader(RGBELoader, art_studio);
 
   console.log(name);

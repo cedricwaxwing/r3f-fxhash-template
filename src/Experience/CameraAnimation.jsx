@@ -1,6 +1,7 @@
 import { useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useState } from "react";
+import { fxpreview } from "../fxhash";
 
 export default function CameraAnimation() {
   const [animationCompleted, setAnimationCompleted] = useState(false);
@@ -8,6 +9,7 @@ export default function CameraAnimation() {
   const checkAnimationCompletion = (time, animationTime, camera) => {
     if (time >= animationTime && !animationCompleted) {
       setAnimationCompleted(true);
+      fxpreview();
     }
   };
 

@@ -1,4 +1,4 @@
-import { Float, Wireframe, useGLTF, useTexture } from "@react-three/drei";
+import { Float, useGLTF, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import height from "../../assets/plants/hops/leaf1-height.jpg";
 import leafGbl from "../../assets/plants/hops/leaf_1.gltf";
@@ -15,7 +15,7 @@ const HopLeaf = ({ texture, ...props }) => {
 
   const { map, roughnessMap, normalMap } = materials["Leaf_1"];
 
-  [map, roughnessMap, normalMap, heightMap].map((map) => {
+  [map, roughnessMap, normalMap, heightMap].forEach((map) => {
     map.offset.set(0.01, 0.01);
     map.repeat.set(0.95, 0.95);
   });
