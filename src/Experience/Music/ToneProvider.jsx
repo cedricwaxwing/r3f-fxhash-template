@@ -5,6 +5,7 @@ const ToneContext = createContext();
 
 export default function ToneProvider({ children }) {
   Tone.start();
+  console.log(Tone);
   return <ToneContext.Provider value={Tone}>{children}</ToneContext.Provider>;
 }
 
