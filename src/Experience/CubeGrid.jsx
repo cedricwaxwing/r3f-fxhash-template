@@ -24,7 +24,7 @@ const Cube = ({ position, scale }) => {
 
 const height = 8;
 const depth = 4;
-const exponent = random_num(1.2, 2.4);
+const exponent = random_num(1.4, 2.4);
 const precomputedX = Array.from(
   { length: depth * 2 },
   (_, i) => Math.sign(i - depth) * Math.pow(Math.abs(i - depth), exponent)
@@ -64,13 +64,13 @@ const CubeGrid = ({ texture }) => {
     />
   );
   const cubes = [[], [], [], []];
-  const visible = random_num(0.35, 0.6);
+  const visible = random_num(0.45, 0.7);
 
   for (let x = -depth; x < depth; x++) {
     for (let y = -height; y < height; y++) {
       for (let z = -depth; z < depth; z++) {
         const seed = random_num(0, 1);
-        const scale = random_num(0.35, 0.999);
+        const scale = random_num(0.25, 0.999);
         const adjustedX = precomputedX[x + depth];
         const adjustedY = precomputedY[y + height];
         const adjustedZ = precomputedZ[z + depth];
