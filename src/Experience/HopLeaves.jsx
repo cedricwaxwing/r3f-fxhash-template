@@ -4,7 +4,6 @@ import height from "../assets/plants/hops/leaf1-height.jpg";
 import leafGbl from "../assets/plants/hops/leaf_1.gltf";
 import { random_num } from "../common/utils";
 import { useEffect, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
 
 export default function HopLeaves({ texture }) {
   const hopLeaves = [];
@@ -68,13 +67,13 @@ export default function HopLeaves({ texture }) {
 function HopLeaf({ position, scale, rotation }) {
   const ref = useRef();
 
-  useFrame(() => {
+  useEffect(() => {
     if (ref.current) {
       ref.current.scale.setScalar(scale);
       ref.current.rotation.set(...rotation);
       ref.current.position.set(...position);
     }
-  });
+  }, [ref, position, scale, rotation]);
 
   return <Instance ref={ref}></Instance>;
 }

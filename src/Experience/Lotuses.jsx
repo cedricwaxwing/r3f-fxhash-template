@@ -67,7 +67,7 @@ function Lotus({ position, scale, rotation, color }) {
       ref.current.position.set(...position);
       ref.current.color.set(color);
     }
-  }, [ref.current, position, scale, rotation, color]);
+  }, [ref, position, scale, rotation, color]);
 
   return <Instance ref={ref}></Instance>;
 }

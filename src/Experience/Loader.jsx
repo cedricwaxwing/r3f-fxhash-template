@@ -1,4 +1,3 @@
-import React from "react";
 import { Html, useProgress } from "@react-three/drei";
 import { useFeatures } from "../common/FeaturesProvider";
 
@@ -9,12 +8,12 @@ const Loader = () => {
   return (
     <Html center>
       <div className="loader">
-        <div class="counter" style={{ color: theme.primary }}>
+        <div className="counter" style={{ color: theme.primary }}>
           {progress.toFixed(0)}%
         </div>
-        <div class="progressbar">
+        <div className="progressbar">
           <span
-            class="progress"
+            className="progress"
             style={{ background: theme.primary, width: `${progress}%` }}
           ></span>
         </div>
