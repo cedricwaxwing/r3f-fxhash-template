@@ -9,14 +9,17 @@ const themes = {
   // },
   Nightfall: {
     background: "#2c3e50",
+    primary: "#3498db",
     colors: ["#e74c3c", "#f1c40f", "#2ecc71", "#3498db", "#e67e22"],
   },
   "Floral Delicacy": {
     background: "#413732",
+    primary: "#9b5672",
     colors: ["#f38169", "#74c5bf", "#d3aa87", "#ffa952", "#9b5672"],
   },
   "Strawberry Theif": {
     background: "#292323",
+    primary: "#db994d",
     colors: ["#db994d", "#fc6141", "#9ca4bd", "#fcceaa", "#8db579"],
   },
   // oceanBreeze: {

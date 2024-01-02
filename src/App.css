@@ -12,3 +12,40 @@
 body > iframe {
   display: none;
 }
+
+loader {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.counter {
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 500;
+  font-size: 2vmin;
+  line-height: 1;
+}
+
+.progressbar {
+  position: relative;
+  max-width: 30vmin;
+  width: 100vw;
+  margin: 1vmin auto 0;
+  height: 1vmin;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 0.5vmin;
+}
+
+span.progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  transition: all .02s ease-in;
+  border-radius: 0.5vmin;
+}
