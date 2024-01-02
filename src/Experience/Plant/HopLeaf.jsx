@@ -20,11 +20,13 @@ const HopLeaf = ({ texture, ...props }) => {
     map.repeat.set(0.95, 0.95);
   });
 
-  const speed = random_num(0.2, 1);
+  const speed = random_num(0.05, 0.5);
 
-  useFrame((_, dt) => {
+  useFrame(({ clock }) => {
+    const time = clock.getElapsedTime();
     if (leafRef.current) {
-      leafRef.current.rotation.z += speed * dt;
+      const oscillation = 0.95 * Math.sin(time * speed);
+      leafRef.current.rotation.z = oscillation;
     }
   });
 

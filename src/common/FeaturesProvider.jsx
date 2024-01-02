@@ -42,7 +42,8 @@ export const constants = () => {
   return {
     theme: themes[choice],
     name: choice,
-    num_shapes: random_int(8, 14),
+    num_shapes: random_int(15, 34),
+    grid: [random_choice([8, 12, 16]), random_choice([8, 12, 16])],
   };
 };
 

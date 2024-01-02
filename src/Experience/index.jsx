@@ -1,18 +1,19 @@
-import { CubeCamera, OrbitControls, SoftShadows } from "@react-three/drei";
-import CustomShapes from "./CustomShapes";
+import { CubeCamera, SoftShadows } from "@react-three/drei";
 import Plant from "./Plant";
 import { RGBELoader } from "three-stdlib";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { useFeatures } from "../common/FeaturesProvider";
 import art_studio from "../assets/hdri/art_studio_1k.hdr";
-import { Perf } from "r3f-perf";
 import { random_choice } from "../common/utils";
+import CubeGrid from "./CubeGrid";
+import CameraAnimation from "./CameraAnimation";
 
 function Experience() {
-  const { theme, name } = useFeatures();
+  const { theme, name, grid } = useFeatures();
   const texture = useLoader(RGBELoader, art_studio);
 
   console.log(name);
+
   return (
     <div
       style={{
@@ -27,7 +28,12 @@ function Experience() {
     >
       <Canvas
         shadows
-        camera={{ fov: 8, position: [25, 25, 50], aspect: 5 / 7 }}
+        orthographic
+        camera={{
+          position: [32, 32, 32],
+          fov: 15,
+          zoom: 48,
+        }}
         style={{
           position: "absolute",
           top: 0,
@@ -38,13 +44,8 @@ function Experience() {
       >
         <ambientLight intensity={0.7} color={random_choice(theme.colors)} />
         <pointLight
-          intensity={0.9}
-          position={[10, 7, 10]}
-          color={random_choice(theme.colors)}
-        />
-        <pointLight
           intensity={0.5}
-          position={[-10, -7, -10]}
+          position={[10, 7, 10]}
           color={random_choice(theme.colors)}
         />
         <directionalLight
@@ -60,17 +61,16 @@ function Experience() {
           />
         </directionalLight>
         <color attach="background" args={[theme.background]} />
-        <CubeCamera frames={1} envMap={texture} resolution={1024}>
+        <CubeCamera envMap={texture} resolution={1024}>
           {(texture) => (
             <>
-              <CustomShapes texture={texture} />
+              <CubeGrid texture={texture} />
               <Plant texture={texture} />
             </>
           )}
         </CubeCamera>
         <SoftShadows size={24} focus={0.88} samples={16} />
-        <OrbitControls />
-        {/* <Perf /> */}
+        <CameraAnimation />
       </Canvas>
     </div>
   );
