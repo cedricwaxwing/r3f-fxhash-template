@@ -1,16 +1,9 @@
-import {
-  Float,
-  Instance,
-  Instances,
-  useGLTF,
-  useTexture,
-} from "@react-three/drei";
+import { Instance, Instances, useGLTF, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import height from "../assets/plants/hops/leaf1-height.jpg";
 import leafGbl from "../assets/plants/hops/leaf_1.gltf";
 import { random_num } from "../common/utils";
 import { memo, useEffect, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
 
 function HopLeaves({ texture }) {
   const hopLeaves = [];

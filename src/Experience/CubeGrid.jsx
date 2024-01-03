@@ -4,7 +4,7 @@ import {
   Instances,
 } from "@react-three/drei";
 import { useFeatures } from "../common/FeaturesProvider";
-import { memo, useEffect, useMemo, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import { RoundedBoxGeometry } from "three-stdlib";
 
 const Cube = ({ position, scale, color }) => {

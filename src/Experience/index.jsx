@@ -3,7 +3,7 @@ import { RGBELoader } from "three-stdlib";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { useFeatures } from "../common/FeaturesProvider";
 import art_studio from "../assets/hdri/art_studio_1k.hdr";
-import { mapValue, random_choice } from "../common/utils";
+import { mapValue } from "../common/utils";
 import CubeGrid from "./CubeGrid";
 import CameraAnimation from "./CameraAnimation";
 import { Suspense, useEffect } from "react";
