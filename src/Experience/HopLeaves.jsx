@@ -3,9 +3,9 @@ import * as THREE from "three";
 import height from "../assets/plants/hops/leaf1-height.jpg";
 import leafGbl from "../assets/plants/hops/leaf_1.gltf";
 import { random_num } from "../common/utils";
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 
-export default function HopLeaves({ texture }) {
+function HopLeaves({ texture }) {
   const hopLeaves = [];
   const num = 90;
 
@@ -77,3 +77,5 @@ function HopLeaf({ position, scale, rotation }) {
 
   return <Instance ref={ref}></Instance>;
 }
+
+export default memo(HopLeaves);

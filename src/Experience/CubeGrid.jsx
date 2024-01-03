@@ -5,7 +5,7 @@ import {
 } from "@react-three/drei";
 import { useFeatures } from "../common/FeaturesProvider";
 import { random_choice, random_num } from "../common/utils";
-import { useEffect, useMemo, useRef } from "react";
+import { memo, useEffect, useMemo, useRef } from "react";
 import { RoundedBoxGeometry } from "three-stdlib";
 
 const Cube = ({ position, scale }) => {
@@ -129,4 +129,4 @@ const CubeGrid = ({ texture }) => {
   );
 };
 
-export default CubeGrid;
+export default memo(CubeGrid);
