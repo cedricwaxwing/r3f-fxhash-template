@@ -28,8 +28,8 @@ export default function CameraAnimation() {
     currentZoom.current = finalZoom * heightScale;
 
     if (animationCompleted) {
-      camera.zoom = currentZoom.current;
-      camera.updateProjectionMatrix();
+      // camera.zoom = currentZoom.current;
+      // camera.updateProjectionMatrix();
       return;
     }
 

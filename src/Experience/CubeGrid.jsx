@@ -4,7 +4,7 @@ import {
   Instances,
 } from "@react-three/drei";
 import { useFeatures } from "../common/FeaturesProvider";
-import { random_choice, random_num } from "../common/utils";
+import { random_bool, random_choice, random_num } from "../common/utils";
 import { memo, useEffect, useMemo, useRef } from "react";
 import { RoundedBoxGeometry } from "three-stdlib";
 
@@ -20,6 +20,27 @@ const Cube = ({ position, scale }) => {
   }, [color]);
 
   return <Instance ref={instanceRef} position={position} scale={scale} />;
+};
+
+const Line = ({ position, scale, rotation }) => {
+  const instanceRef = useRef();
+  const { theme } = useFeatures();
+  const color = useMemo(() => random_choice(theme.colors), [theme.colors]);
+
+  useEffect(() => {
+    if (instanceRef.current) {
+      instanceRef.current.color.set(color);
+    }
+  }, [color]);
+
+  return (
+    <Instance
+      ref={instanceRef}
+      position={position}
+      scale={scale}
+      rotation={rotation}
+    />
+  );
 };
 
 const height = 8;
@@ -64,7 +85,8 @@ const CubeGrid = ({ texture }) => {
     />
   );
   const cubes = [[], [], [], []];
-  const visible = random_num(0.45, 0.7);
+  const lines = [];
+  const cubes_visible = random_num(0.45, 0.7);
 
   for (let x = -depth; x < depth; x++) {
     for (let y = -height; y < height; y++) {
@@ -82,14 +104,33 @@ const CubeGrid = ({ texture }) => {
             scale={scale}
           />
         );
-        if (seed < (visible / 4) * 1) {
+        if (seed < (cubes_visible / 4) * 1) {
           cubes[0].push(cube);
-        } else if (seed < (visible / 4) * 2) {
+        } else if (seed < (cubes_visible / 4) * 2) {
           cubes[1].push(cube);
-        } else if (seed < (visible / 4) * 3) {
+        } else if (seed < (cubes_visible / 4) * 3) {
           cubes[2].push(cube);
-        } else if (seed < (visible / 4) * 4) {
+        } else if (seed < (cubes_visible / 4) * 4) {
           cubes[3].push(cube);
+        }
+
+        if (random_bool(0.09)) {
+          const lineDepth = random_num(0.01, 0.08);
+          const lineScale = [lineDepth, lineDepth, random_num(0.01, height)];
+          const line = (
+            <Line
+              key={`line-${x}-${y}-${z}`}
+              texture={texture}
+              position={[adjustedX, adjustedY, adjustedZ]}
+              scale={lineScale}
+              rotation={[
+                random_choice([0, Math.PI / 2]),
+                random_choice([0, Math.PI / 2]),
+                random_choice([0, Math.PI / 2]),
+              ]}
+            />
+          );
+          lines.push(line);
         }
       }
     }
@@ -124,6 +165,15 @@ const CubeGrid = ({ texture }) => {
       >
         {standardMaterial}
         {cubes[3].map((cube, i) => cube)}
+      </Instances>
+      <Instances
+        castShadow
+        receiveShadow
+        range={lines.length}
+        geometry={roundedBoxGeo}
+      >
+        {standardMaterial}
+        {lines.map((line, i) => line)}
       </Instances>
     </>
   );
