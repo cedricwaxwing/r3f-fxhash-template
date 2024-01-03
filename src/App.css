@@ -7,10 +7,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.App:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.2), rgba(0,0,0,0.2));
+  pointer-events: none;
+  mix-blend-mode: overlay;
 }
 
 body > iframe {
   display: none;
+}
+
+.wrapper {
+  max-height: 90vh;
+  width: 100%;
+  position: relative;
+  aspect-ratio: 5/7;
+  max-width: calc(90vh * 5/7);
+  border: 0.75vmin solid #f7f7f7;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
 }
 
 loader {

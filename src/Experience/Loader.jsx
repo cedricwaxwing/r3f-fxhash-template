@@ -1,15 +1,18 @@
 import { Html, useProgress } from "@react-three/drei";
 import { useFeatures } from "../common/FeaturesProvider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Loader = () => {
   const { theme } = useFeatures();
   const { progress } = useProgress();
   const [loaded, setLoaded] = useState(false);
 
-  if (!loaded && progress > 90) {
-    setLoaded(true);
-  }
+  useEffect(() => {
+    if (progress > 90 && !loaded) {
+      setLoaded(true);
+    }
+  }, [progress, loaded]);
+
   return (
     <Html center>
       <div className="loader">

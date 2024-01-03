@@ -41,7 +41,7 @@ function LotusLeaves({ texture }) {
         bumpMap={heightMap}
         bumpScale={3}
         envMap={texture}
-        envMapIntensity={0.5}
+        envMapIntensity={0.25}
         displacementMap={heightMap}
         displacementScale={0.5}
         side={THREE.DoubleSide}

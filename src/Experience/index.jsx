@@ -1,9 +1,9 @@
-import { CubeCamera, SoftShadows } from "@react-three/drei";
+import { CubeCamera, SoftShadows, Sphere } from "@react-three/drei";
 import { RGBELoader } from "three-stdlib";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { useFeatures } from "../common/FeaturesProvider";
 import art_studio from "../assets/hdri/art_studio_1k.hdr";
-import { random_choice } from "../common/utils";
+import { mapValue, random_choice } from "../common/utils";
 import CubeGrid from "./CubeGrid";
 import CameraAnimation from "./CameraAnimation";
 import { Suspense, useEffect } from "react";
@@ -11,9 +11,11 @@ import HopLeaves from "./HopLeaves";
 import LotusLeaves from "./Lotuses";
 import { Perf } from "r3f-perf";
 import Loader from "./Loader";
+import { LayerMaterial, Gradient } from "lamina";
+import * as THREE from "three";
 
 function Experience() {
-  const { theme } = useFeatures();
+  const { theme, lighting, lightingBrightness } = useFeatures();
   const texture = useLoader(RGBELoader, art_studio);
 
   useEffect(() => {
@@ -21,18 +23,7 @@ function Experience() {
   }, []);
 
   return (
-    <div
-      style={{
-        maxHeight: "90vh",
-        width: "100%",
-        position: "relative",
-        aspectRatio: "5/7",
-        maxWidth: "calc(90vh * 5/7)",
-        border: "1.5vmin solid #e0dfdf",
-        boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.5)",
-        backgroundColor: theme.background,
-      }}
-    >
+    <div className="wrapper">
       <Canvas
         shadows
         orthographic
@@ -50,21 +41,24 @@ function Experience() {
         }}
       >
         <Suspense fallback={<Loader />}>
-          <ambientLight intensity={0.7} color={random_choice(theme.colors)} />
-          <pointLight
-            intensity={0.9}
-            position={[10, 100, 10]}
-            color={random_choice(theme.colors)}
+          <ambientLight
+            intensity={mapValue(lightingBrightness, 0, 1, 1.5, 0.5)}
+            color={lighting}
           />
           <pointLight
-            intensity={3}
-            position={[100, 10, 10]}
-            color={random_choice(theme.colors)}
+            intensity={mapValue(lightingBrightness, 0, 1, 2, 0.05)}
+            position={[100, 30, 10]}
+            color={lighting}
+          />
+          <pointLight
+            intensity={mapValue(lightingBrightness, 0, 1, 4, 0.25)}
+            position={[30, 100, 10]}
+            color={lighting}
           />
           <directionalLight
             castShadow
             position={[2.5, 8, 5]}
-            intensity={1.5}
+            intensity={1}
             shadow-mapSize={2048}
             shadow-bias={0.2}
           >
@@ -73,7 +67,20 @@ function Experience() {
               args={[-10, 10, -10, 10, 0.1, 50]}
             />
           </directionalLight>
-          <color attach="background" args={[theme.background]} />
+          {theme.background.length > 1 ? (
+            <Sphere scale={10000}>
+              <LayerMaterial side={THREE.DoubleSide}>
+                <Gradient
+                  axes="y"
+                  mapping="local"
+                  colorA={theme.background[0]}
+                  colorB={theme.background[1]}
+                />
+              </LayerMaterial>
+            </Sphere>
+          ) : (
+            <color attach="background" args={[theme.background[0]]} />
+          )}
           <CubeCamera envMap={texture} resolution={1024}>
             {(texture) => (
               <>

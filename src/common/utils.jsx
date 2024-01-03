@@ -39,3 +39,15 @@ export const shuffleArray = (arr, seed) => {
   }
   return ret;
 };
+
+export const brightness = (hexColor) => {
+  const color = hexColor.startsWith("#") ? hexColor.slice(1) : hexColor;
+
+  const r = parseInt(color.substring(0, 2), 16);
+  const g = parseInt(color.substring(2, 4), 16);
+  const b = parseInt(color.substring(4, 6), 16);
+
+  const brightness = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+  return brightness;
+};

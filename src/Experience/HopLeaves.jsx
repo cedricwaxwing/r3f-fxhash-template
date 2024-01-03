@@ -1,9 +1,16 @@
-import { Instance, Instances, useGLTF, useTexture } from "@react-three/drei";
+import {
+  Float,
+  Instance,
+  Instances,
+  useGLTF,
+  useTexture,
+} from "@react-three/drei";
 import * as THREE from "three";
 import height from "../assets/plants/hops/leaf1-height.jpg";
 import leafGbl from "../assets/plants/hops/leaf_1.gltf";
 import { random_num } from "../common/utils";
 import { memo, useEffect, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 
 function HopLeaves({ texture }) {
   const hopLeaves = [];
@@ -70,10 +77,10 @@ function HopLeaf({ position, scale, rotation }) {
   useEffect(() => {
     if (ref.current) {
       ref.current.scale.setScalar(scale);
-      ref.current.rotation.set(...rotation);
       ref.current.position.set(...position);
+      ref.current.rotation.set(...rotation);
     }
-  }, [ref, position, scale, rotation]);
+  }, [ref, scale, position, rotation]);
 
   return <Instance ref={ref}></Instance>;
 }
