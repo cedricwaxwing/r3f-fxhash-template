@@ -18,8 +18,9 @@ export default function CameraAnimation() {
 
   const checkAnimationCompletion = (time, animationTime) => {
     if (time >= animationTime && !animationCompleted) {
+      const previewFunc = fxpreview();
+      previewFunc(); // Now calling the returned function
       setAnimationCompleted(true);
-      fxpreview();
     }
   };
 

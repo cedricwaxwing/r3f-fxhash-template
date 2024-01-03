@@ -13,5 +13,16 @@ export function registerFeatures(features: {
 }
 
 export function fxpreview(): () => void {
-  return window.$fx.preview;
+  return () => {
+      try {
+          if (window.$fx && typeof window.$fx.preview === 'function') {
+            console.log("FX preview")
+              window.$fx.preview();
+          } else {
+              console.warn('fxpreview function is not available');
+          }
+      } catch (error) {
+          console.error('Error executing fxpreview:', error);
+      }
+  };
 }
