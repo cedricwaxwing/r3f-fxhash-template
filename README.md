@@ -2,8 +2,9 @@
 
 This is a quickstart template based on `create-react-app` for creating [`fxhash`](https://www.fxhash.xyz) tokens using [`react-three-fiber`](https://github.com/pmndrs/react-three-fiber) + `typescript`.
 
-[![download me](https://user-images.githubusercontent.com/5009316/142333930-565052ab-a860-4081-b6b5-3c174e5a17a9.png)](https://user-images.githubusercontent.com/5009316/142333930-565052ab-a860-4081-b6b5-3c174e5a17a9.png?raw=true "Download")
-
+<a href="https://user-images.githubusercontent.com/5009316/142333930-565052ab-a860-4081-b6b5-3c174e5a17a9.png" download="ImageName">
+  <img src="https://user-images.githubusercontent.com/5009316/142333930-565052ab-a860-4081-b6b5-3c174e5a17a9.png" alt="Image Download">
+</a>
 
 ## Development
 
