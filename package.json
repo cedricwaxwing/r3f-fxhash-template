@@ -13,8 +13,6 @@
   "dependencies": {
     "@react-three/drei": "^9.88.11",
     "@react-three/fiber": "^8.11.9",
-    "@react-three/postprocessing": "^2.7.0",
-    "chroma-js": "^2.4.2",
     "glslify-loader": "^2.0.0",
     "lamina": "^1.1.23",
     "leva": "^0.9.35",
@@ -24,10 +22,7 @@
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
     "three": "0.150.1",
-    "three-stdlib": "^2.21.8",
-    "tonal": "^2.2.0",
-    "tone": "^14.7.77",
-    "use-capture": "^0.4.0"
+    "three-stdlib": "^2.21.8"
   },
   "devDependencies": {
     "typescript": "3.3.3"

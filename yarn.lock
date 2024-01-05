@@ -1098,13 +1098,6 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
-"@babel/runtime@^7.21.0":
-  version "7.21.0"
-  resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.21.0.tgz"
-  integrity sha512-xwII0//EObnq89Ji5AKYQaRYiW/nZ3llSv29d49IuxPhKbtJoLP+9QUUZ4nVragQVtaVGeZrpB+ZtG/Pdy/POw==
-  dependencies:
-    regenerator-runtime "^0.13.11"
-
 "@babel/template@^7.18.10", "@babel/template@^7.20.7", "@babel/template@^7.3.3":
   version "7.20.7"
   resolved "https://registry.npmjs.org/@babel/template/-/template-7.20.7.tgz"
@@ -2206,23 +2199,6 @@
     suspend-react "^0.0.8"
     zustand "^3.7.1"
 
-"@react-three/postprocessing@^2.7.0":
-  version "2.7.0"
-  resolved "https://registry.npmjs.org/@react-three/postprocessing/-/postprocessing-2.7.0.tgz"
-  integrity sha512-lJfV8GYp+L1SlGRcl8QPUg9QMdO+8ojW2kfaEc/MuvoI4rX3TRhVd3qFjjF++0bBmzt8LeQpDHCOHFAaT3MNYA==
-  dependencies:
-    postprocessing "^6.29.0"
-    react-merge-refs "^1.1.0"
-    screen-space-reflections "2.5.0"
-    three-stdlib "^2.8.11"
-
-"@rollup/plugin-alias@^3.1.1":
-  version "3.1.9"
-  resolved "https://registry.npmjs.org/@rollup/plugin-alias/-/plugin-alias-3.1.9.tgz"
-  integrity sha512-QI5fsEvm9bDzt32k39wpOwZhVzRcL5ydcffUHMyLVaVaLeC70I8TJZ17F1z1eMoLu4E/UOcH9BWVkKpIKdrfiw==
-  dependencies:
-    slash "^3.0.0"
-
 "@rollup/plugin-babel@^5.2.0":
   version "5.3.1"
   resolved "https://registry.npmjs.org/@rollup/plugin-babel/-/plugin-babel-5.3.1.tgz"
@@ -2230,19 +2206,6 @@
   dependencies:
     "@babel/helper-module-imports" "^7.10.4"
     "@rollup/pluginutils" "^3.1.0"
-
-"@rollup/plugin-commonjs@^15.0.0":
-  version "15.1.0"
-  resolved "https://registry.npmjs.org/@rollup/plugin-commonjs/-/plugin-commonjs-15.1.0.tgz"
-  integrity sha512-xCQqz4z/o0h2syQ7d9LskIMvBSH4PX5PjYdpSSvgS+pQik3WahkQVNWg3D8XJeYjZoVWnIUQYDghuEMRGrmQYQ==
-  dependencies:
-    "@rollup/pluginutils" "^3.1.0"
-    commondir "^1.0.1"
-    estree-walker "^2.0.1"
-    glob "^7.1.6"
-    is-reference "^1.2.1"
-    magic-string "^0.25.7"
-    resolve "^1.17.0"
 
 "@rollup/plugin-node-resolve@^11.2.1":
   version "11.2.1"
@@ -2255,18 +2218,6 @@
     deepmerge "^4.2.2"
     is-module "^1.0.0"
     resolve "^1.19.0"
-
-"@rollup/plugin-node-resolve@^9.0.0":
-  version "9.0.0"
-  resolved "https://registry.npmjs.org/@rollup/plugin-node-resolve/-/plugin-node-resolve-9.0.0.tgz"
-  integrity sha512-gPz+utFHLRrd41WMP13Jq5mqqzHL3OXrfj3/MkSyB6UBIcuNt9j60GCbarzMzdf1VHFpOxfQh/ez7wyadLMqkg==
-  dependencies:
-    "@rollup/pluginutils" "^3.1.0"
-    "@types/resolve" "1.17.1"
-    builtin-modules "^3.1.0"
-    deepmerge "^4.2.2"
-    is-module "^1.0.0"
-    resolve "^1.17.0"
 
 "@rollup/plugin-replace@^2.4.1":
   version "2.4.2"
@@ -3292,14 +3243,6 @@ attr-accept@^2.2.2:
   resolved "https://registry.npmjs.org/attr-accept/-/attr-accept-2.2.2.tgz"
   integrity sha512-7prDjvt9HmqiZ0cl5CRjtS84sEyhsHP2coDkaZKRKVfCDo9s7iw7ChVmar78Gu9pC4SoR/28wFu/G5JJhTnqEg==
 
-automation-events@^5.0.2:
-  version "5.0.2"
-  resolved "https://registry.npmjs.org/automation-events/-/automation-events-5.0.2.tgz"
-  integrity sha512-8mfgjeI22tlKeaGY8y0bDt93IIUJhQKR/ISTsnhhFkpAzCirPdQ/Rmfp3xakCTmIihLgDuIWcWygHWozYKVGyQ==
-  dependencies:
-    "@babel/runtime" "^7.21.0"
-    tslib "^2.5.0"
-
 autoprefixer@^10.4.13:
   version "10.4.13"
   resolved "https://registry.npmjs.org/autoprefixer/-/autoprefixer-10.4.13.tgz"
@@ -3733,11 +3676,6 @@ chokidar@^3.4.2, chokidar@^3.5.3:
     readdirp "~3.6.0"
   optionalDependencies:
     fsevents "~2.3.2"
-
-chroma-js@^2.4.2:
-  version "2.4.2"
-  resolved "https://registry.npmjs.org/chroma-js/-/chroma-js-2.4.2.tgz"
-  integrity sha512-U9eDw6+wt7V8z5NncY2jJfZa+hUH8XEj8FQHgFJTrUFnJfXYf4Ml4adI2vXZOjqRDpFWtYVWypDfZwnJ+HIR4A==
 
 chrome-trace-event@^1.0.2:
   version "1.0.3"
@@ -4952,11 +4890,6 @@ estree-walker@^1.0.1:
   resolved "https://registry.npmjs.org/estree-walker/-/estree-walker-1.0.1.tgz"
   integrity sha512-1fMXF3YP4pZZVozF8j/ZLfvnR8NSIljt56UhbZ5PeeDmmGHpgpdwQt7ITlGvYaQukCvuBRMLEiKiYC+oeIg4cg==
 
-estree-walker@^2.0.1:
-  version "2.0.2"
-  resolved "https://registry.npmjs.org/estree-walker/-/estree-walker-2.0.2.tgz"
-  integrity sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==
-
 esutils@^2.0.2:
   version "2.0.3"
   resolved "https://registry.npmjs.org/esutils/-/esutils-2.0.3.tgz"
@@ -6058,13 +5991,6 @@ is-potential-custom-element-name@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/is-potential-custom-element-name/-/is-potential-custom-element-name-1.0.1.tgz"
   integrity sha512-bCYeRA2rVibKZd+s2625gGnGF/t7DSqDs4dP7CrLA1m7jKWz6pps0LpYLJN8Q64HtmPKJ1hrN3nzPNKFEKOUiQ==
-
-is-reference@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/is-reference/-/is-reference-1.2.1.tgz"
-  integrity sha512-U82MsXXiFIrjCK4otLT+o2NA2Cd2g5MLoOVXUZjIOhLurrRxpEXzI8O0KZHr3IjLvlAH1kTPYSuqer5T9ZVBKQ==
-  dependencies:
-    "@types/estree" "*"
 
 is-regex@^1.1.4:
   version "1.1.4"
@@ -8261,11 +8187,6 @@ postcss@^8.0.9, postcss@^8.3.5, postcss@^8.4.19, postcss@^8.4.4:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-postprocessing@^6.29.0:
-  version "6.30.1"
-  resolved "https://registry.npmjs.org/postprocessing/-/postprocessing-6.30.1.tgz"
-  integrity sha512-GkBrQtX6KjNz+Pz3+ABvP1aXKCCW7h/tuE37wlM90WZLbaGfJ7eSIBN2gPgKExuK584IPde0YOoNiuWMr7PNCQ==
-
 potpack@^1.0.1:
   version "1.0.2"
   resolved "https://registry.npmjs.org/potpack/-/potpack-1.0.2.tgz"
@@ -8807,7 +8728,7 @@ resolve@^0.6.1:
   resolved "https://registry.npmjs.org/resolve/-/resolve-0.6.3.tgz"
   integrity sha512-UHBY3viPlJKf85YijDUcikKX6tmF4SokIDp518ZDVT92JNDcG5uKIthaT/owt3Sar0lwtOafsQuwrg22/v2Dwg==
 
-resolve@^1.0.0, resolve@^1.1.7, resolve@^1.14.2, resolve@^1.17.0, resolve@^1.19.0, resolve@^1.20.0, resolve@^1.22.1, resolve@^1.3.3:
+resolve@^1.0.0, resolve@^1.1.7, resolve@^1.14.2, resolve@^1.19.0, resolve@^1.20.0, resolve@^1.22.1, resolve@^1.3.3:
   version "1.22.1"
   resolved "https://registry.npmjs.org/resolve/-/resolve-1.22.1.tgz"
   integrity sha512-nBpuuYuY5jFsli/JIs1oldw6fOQCBioohqWZg/2hiaOybXOft4lonv85uDOKXdf8rhyK159cxU5cDcK/NKk8zw==
@@ -8965,11 +8886,6 @@ schema-utils@^4.0.0:
     ajv "^8.8.0"
     ajv-formats "^2.1.1"
     ajv-keywords "^5.0.0"
-
-screen-space-reflections@2.5.0:
-  version "2.5.0"
-  resolved "https://registry.npmjs.org/screen-space-reflections/-/screen-space-reflections-2.5.0.tgz"
-  integrity sha512-fWSDMhJS0xwD3LTxRRch7Lb9NzxsR66sCmtDmAA7i+OGnghUrBBsrha85ng7StnCBaLq/BKmZ97dLxWd1XgWdQ==
 
 select-hose@^2.0.0:
   version "2.0.0"
@@ -9231,15 +9147,6 @@ stackframe@^1.3.4:
   version "1.3.4"
   resolved "https://registry.npmjs.org/stackframe/-/stackframe-1.3.4.tgz"
   integrity sha512-oeVtt7eWQS+Na6F//S4kJ2K2VbRlS9D43mAlMyVpVWovy9o+jfgH8O9agzANzaiLjclA0oYzUXEM4PurhSUChw==
-
-standardized-audio-context@^25.1.8:
-  version "25.3.41"
-  resolved "https://registry.npmjs.org/standardized-audio-context/-/standardized-audio-context-25.3.41.tgz"
-  integrity sha512-NCKY1kLCGN37dnCCIG4NX1LHWRgONvIU6u6GS3nzhMM9CV/M+GR48uIeojjeJBSICfWXfQ+t2N1MTdsgJz3wlA==
-  dependencies:
-    "@babel/runtime" "^7.21.0"
-    automation-events "^5.0.2"
-    tslib "^2.5.0"
 
 stats-gl@^1.0.4:
   version "1.0.5"
@@ -9618,7 +9525,7 @@ three-mesh-bvh@^0.6.7:
   resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.6.8.tgz#f27d18ca75bdc59316dff0f561af8fb316621a54"
   integrity sha512-EGebF9DZx1S8+7OZYNNTT80GXJZVf+UYXD/HyTg/e2kR/ApofIFfUS4ZzIHNnUVIadpnLSzM4n96wX+l7GMbnQ==
 
-three-stdlib@^2.21.8, three-stdlib@^2.8.11:
+three-stdlib@^2.21.8:
   version "2.21.8"
   resolved "https://registry.npmjs.org/three-stdlib/-/three-stdlib-2.21.8.tgz"
   integrity sha512-kqisiKvO4mSy59v5vWqBQSH8famLxp7Z51LxpMJI9GwDxqODaW02rhIwmjYDEzZWNFpjZpoDHVGbdpeHf8h3SA==
@@ -9696,108 +9603,6 @@ toidentifier@1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/toidentifier/-/toidentifier-1.0.1.tgz"
   integrity sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==
-
-tonal-array@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.npmjs.org/tonal-array/-/tonal-array-2.2.2.tgz"
-  integrity sha512-h6YIq20L0EEU4EsDoKHAjl5kD2EQn467VfV79QHAuybvNCJpqqRNsQ3QNvoQyir1BgDXaDUIN9FEmQJNiaaCKA==
-  dependencies:
-    tonal-note "^2.2.2"
-
-tonal-chord@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.npmjs.org/tonal-chord/-/tonal-chord-2.2.2.tgz"
-  integrity sha512-gOIXapi6Gx3ISRKdEJKEQjhDBiwjhaalyWSrN5rijGrSyyFFNZ+EVOfzcqLtnVAF9BgeO9Ca0eXCor3XpHdEJg==
-  dependencies:
-    tonal-dictionary "^2.2.2"
-    tonal-distance "^2.2.2"
-    tonal-note "^2.2.2"
-    tonal-pcset "^2.2.2"
-
-tonal-dictionary@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.npmjs.org/tonal-dictionary/-/tonal-dictionary-2.2.2.tgz"
-  integrity sha512-283ppJl/0lohhlVPMI6t5C6XwaP5Wx0egu9qfG9TLCT2tn4pRwYpXkzGufd9icvkJTgOylOum3+RxWmywUIPIg==
-  dependencies:
-    tonal-array "^2.2.2"
-    tonal-note "^2.2.2"
-    tonal-pcset "^2.2.2"
-
-tonal-distance@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.npmjs.org/tonal-distance/-/tonal-distance-2.2.2.tgz"
-  integrity sha512-ktA6OapCxaetXJb/JuXD5QwfyB7/G3y3ONby7Kkbezyffc57cnNfjdhlTR9XBR7eSFIY/J1KuhLwMx/qrffT4g==
-  dependencies:
-    tonal-interval "^2.2.2"
-    tonal-note "^2.2.2"
-
-tonal-interval@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.npmjs.org/tonal-interval/-/tonal-interval-2.2.2.tgz"
-  integrity sha512-lrtDU8lH5IAX7YE63OhGGDRpVb4OoGxaN0wDu5XC3sUhXBwjSgNYpHY2D9JI2aWQ/Er9jhQbnw9b0ffkLy34+Q==
-
-tonal-key@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.npmjs.org/tonal-key/-/tonal-key-2.2.2.tgz"
-  integrity sha512-KIc0b8yPl2ATDxF/65P52tIIempNsAQrug0idpD0zFvs5F5cb1hp7Rh7JJ4gECwC/6a3Hgdd1jomI+TnJ7K98w==
-  dependencies:
-    tonal-array "^2.2.2"
-    tonal-distance "^2.2.2"
-    tonal-note "^2.2.2"
-    tonal-roman-numeral "^2.2.2"
-
-tonal-note@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.npmjs.org/tonal-note/-/tonal-note-2.2.2.tgz"
-  integrity sha512-RNK3Nb8PxBEW9yYGStcoczgE8bCYFZ5zfLvYJjvuzLWiwTQmqWOhTzONVobVCGFZ/jgDNwpBEKe/bngL3g3Xfw==
-
-tonal-pcset@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.npmjs.org/tonal-pcset/-/tonal-pcset-2.2.2.tgz"
-  integrity sha512-PSqhkxzckO6J27W0GxawHYln4wvfDJ7puDmccksyFOBo97UhLnpxiyvBekhiYpkuaMtoZLQC/KALAkEj7lcb+A==
-  dependencies:
-    tonal-array "^2.2.2"
-    tonal-interval "^2.2.2"
-    tonal-note "^2.2.2"
-
-tonal-roman-numeral@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.npmjs.org/tonal-roman-numeral/-/tonal-roman-numeral-2.2.2.tgz"
-  integrity sha512-+auQNObpW3OvsSqlo+Cc+0otrlEhtbEgpzkPoKbTtkCva0P9oSkSz0OZ9fI73KQM5MsBs1XbB+olxppWkzYTFw==
-
-tonal-scale@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.npmjs.org/tonal-scale/-/tonal-scale-2.2.2.tgz"
-  integrity sha512-tDb3YCoTF50XOXq9kNhGB1JkInk7qAGN6GQnP/3xkGxkreFFRZyI58jfHlmWf/AH4+IKb/exsOmL6G8Ok/PCRw==
-  dependencies:
-    tonal-array "^2.2.2"
-    tonal-dictionary "^2.2.2"
-    tonal-distance "^2.2.2"
-    tonal-note "^2.2.2"
-    tonal-pcset "^2.2.2"
-
-tonal@^2.2.0:
-  version "2.2.2"
-  resolved "https://registry.npmjs.org/tonal/-/tonal-2.2.2.tgz"
-  integrity sha512-Ze2bQc6KhAf3FKM9HzEsQ4z8hZh4WYCOsCrryONqf/THGOrOpL9Cc8Uc0dq0OA2yK2JbD5FhZckEXNYyD9946A==
-  dependencies:
-    tonal-array "^2.2.2"
-    tonal-chord "^2.2.2"
-    tonal-dictionary "^2.2.2"
-    tonal-distance "^2.2.2"
-    tonal-interval "^2.2.2"
-    tonal-key "^2.2.2"
-    tonal-note "^2.2.2"
-    tonal-pcset "^2.2.2"
-    tonal-scale "^2.2.2"
-
-tone@^14.7.77:
-  version "14.7.77"
-  resolved "https://registry.npmjs.org/tone/-/tone-14.7.77.tgz"
-  integrity sha512-tCfK73IkLHyzoKUvGq47gyDyxiKLFvKiVCOobynGgBB9Dl0NkxTM2p+eRJXyCYrjJwy9Y0XCMqD3uOYsYt2Fdg==
-  dependencies:
-    standardized-audio-context "^25.1.8"
-    tslib "^2.0.1"
 
 tough-cookie@^4.0.0:
   version "4.1.2"
@@ -9883,7 +9688,7 @@ tslib@^1.8.1:
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.1, tslib@^2.0.3, tslib@^2.5.0:
+tslib@^2.0.3:
   version "2.5.0"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.5.0.tgz"
   integrity sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==
@@ -10045,17 +9850,6 @@ url-parse@^1.5.3:
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
-
-use-capture@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.npmjs.org/use-capture/-/use-capture-0.4.0.tgz"
-  integrity sha512-Uy/SnNw3GK7FTROEHoccIK5wo0R4JU7D1K3ouAfYz9frJdb1IryyMV/wtb8IBvxML2YXGBSvX86ryb7GbmYysA==
-  dependencies:
-    "@babel/runtime" "^7.11.2"
-    "@rollup/plugin-alias" "^3.1.1"
-    "@rollup/plugin-commonjs" "^15.0.0"
-    "@rollup/plugin-node-resolve" "^9.0.0"
-    utility-types "^3.10.0"
 
 use-sync-external-store@1.2.0:
   version "1.2.0"
