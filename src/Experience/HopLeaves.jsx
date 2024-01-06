@@ -1,6 +1,7 @@
 import { Instance, Instances, useGLTF, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import height from "../assets/plants/hops/leaf1-height.jpg";
+import alpha from "../assets/plants/hops/leaf1-alpha.jpg";
 import leafGbl from "../assets/plants/hops/leaf_1.gltf";
 import { random_num } from "../common/utils";
 import { memo, useEffect, useRef } from "react";
@@ -25,11 +26,13 @@ function HopLeaves({ texture }) {
   const { nodes, materials } = useGLTF(leafGbl);
 
   const heightMap = useTexture(height);
+  const alphaMap = useTexture(alpha);
   heightMap.flipY = true;
+  alphaMap.flipY = true;
 
   const { map, roughnessMap, normalMap } = materials["Leaf_1"];
 
-  [map, roughnessMap, normalMap, heightMap].forEach((map) => {
+  [map, alphaMap, roughnessMap, normalMap, heightMap].forEach((map) => {
     map.offset.set(0.01, 0.01);
     map.repeat.set(0.95, 0.95);
   });
@@ -42,6 +45,7 @@ function HopLeaves({ texture }) {
       geometry={nodes.Leaf_1.geometry}
     >
       <meshStandardMaterial
+        alphaMap={alphaMap}
         map={map}
         roughnessMap={roughnessMap}
         bumpMap={heightMap}

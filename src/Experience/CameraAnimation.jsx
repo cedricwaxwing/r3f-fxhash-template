@@ -2,17 +2,19 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useRef, useState } from "react";
 import { fxpreview } from "../fxhash";
+import { useFeatures } from "../common/FeaturesProvider";
 
-const finalZoom = 40;
-const initialRadius = 28;
-const finalRadius = 32;
-const animationTime = 7;
-const finalAngle = Math.PI / 4;
-const baseHeight = 1733 / 2;
-
-export default function CameraAnimation() {
+export default function CameraAnimation({ canvasRef }) {
+  const { recording, zoomRatio, fullscreen } = useFeatures();
   const { size } = useThree();
   const [animationCompleted, setAnimationCompleted] = useState(false);
+
+  const finalZoom = 40 * zoomRatio;
+  const initialRadius = 27;
+  const finalRadius = 32;
+  const animationTime = 7;
+  const finalAngle = Math.PI / 4;
+  const baseHeight = 1733 / 2;
 
   const currentZoom = useRef(finalZoom);
 
@@ -36,7 +38,7 @@ export default function CameraAnimation() {
 
     const time = clock.getElapsedTime();
     let t = Math.min(time / animationTime, 1);
-    const easeOut = 1 - Math.pow(1 - t, 3);
+    const easeOut = 1 - Math.pow(1 - t, 5);
     const easedZoom =
       initialRadius + (currentZoom.current - initialRadius) * easeOut;
     const totalRotation = easeOut * finalAngle;

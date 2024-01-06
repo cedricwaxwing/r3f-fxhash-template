@@ -39,7 +39,7 @@ const Line = ({ position, scale, rotation, color }) => {
 };
 
 const CubeGrid = ({ texture }) => {
-  const { cubes, lines, config } = useFeatures();
+  const { cubes, lines, lighting, config } = useFeatures();
 
   const roundedBoxGeo = new RoundedBoxGeometry(1, 1, 1, 8, config.boxBevel);
 
@@ -62,6 +62,8 @@ const CubeGrid = ({ texture }) => {
       distortion={2}
       roughness={0.15}
       color={"#fff"}
+      emissive={lighting}
+      emissiveIntensity={0.1}
     />
   );
 

@@ -4,16 +4,16 @@ import { mapValue, random_choice, random_num, brightness } from "./utils";
 import CubeData from "./CubeData";
 
 const themes = {
-  Tropical: {
+  Tropicana: {
     background: ["#cefbe9", "#9cece4"],
     primary: "#6a1c6a",
-    lighting: ["#f9ac90", "#fbba45"],
+    lighting: ["#f9ac90", "#fb8545"],
     colors: ["#d55222", "#fbba45", "#20c8b7", "#2aa0e9", "#a435a4"],
   },
   "Cherry Blossom": {
-    background: ["#f2caca", "#ecb1b1"],
+    background: ["#f2caca", "#a9656a"],
     primary: "#a90d2c",
-    lighting: ["#e39494", "#ffd900", "#FFA07A"],
+    lighting: ["#e39494", "#977185"],
     colors: ["#FF6B6B", "#ffd900", "#FFA07A", "#d45fbb", "#DC143C"],
   },
   "Mystic Forest": {
@@ -25,7 +25,7 @@ const themes = {
   "Autumn Hike": {
     background: ["#dcaf77", "#d29163"],
     primary: "#8f4421",
-    lighting: ["#eec53e", "#FF6347", "#A0522D"],
+    lighting: ["#FF6347", "#A0522D"],
     colors: ["#906731", "#eec53e", "#c8debd", "#FF6347", "#A0522D"],
   },
   "Celestial Spectrum": {
@@ -61,10 +61,12 @@ export const constants = () => {
     name: choice,
     cubes: setup.cubes,
     lines: setup.lines,
+    zoomRatio: random_num(1, 3.5),
     config: {
       exponent: setup.exponent,
       boxBevel: random_num(0.05, 0.15),
     },
+    recording: false,
   };
 };
 
@@ -79,7 +81,7 @@ const FeaturesContext = createContext();
 function FeaturesProvider({ children }) {
   registerFeatures({
     theme: choice,
-    lighting: constantsData.lighting,
+    zoom: constantsData.zoomRatio,
     spacing:
       spacingSizes[
         Math.round(

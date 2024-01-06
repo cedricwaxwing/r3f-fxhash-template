@@ -25,3 +25,25 @@ The root `html` file (located in the `public/` folder) can be edited freely so l
 ## Packaging + Release
 
 `npm run release` will build & package into `fxhash-release.zip`, ready to upload to the site.
+
+Noteable hashes:
+
+Floral Delicacy
+ookGiPKemj1SzfpuNvqbqAuE3dceMi4f9nDr9FGC9epciRK1oSz
+oo64t5PwU5sP4YmnMKZWRWAQs9LfGs2AGWRsoZBfc57HXZDUjbh
+
+Strawberry Theif
+oogUuvjJXa6QAvw9Q8T3KKAkZSpbNaT7iyjR5oDJh8NJ7tcCG3e
+
+Mystic Forest
+oouxjQUqJ5rJxgxPRixru2x1FPY2KMoedrV17JVviVdaeFQ5keb
+
+Autumn Hike
+ooNaiJ6AgtMQezqdqf2rFHFMES1jQRpWJ1QjSdAtnrxDfSuf57A
+ooXXaX3LKJkkvkrciU3SuGLNxSVr3pUsVe8uo6LYf1FUKRtmYUd
+
+Tropicana
+ooS8MGUh3mesCnY2D4L1rrAhryUtvHVXxjBzPw5mmQbScZi76ag
+
+Celestial Spectrum
+ooQjntzzAAEU3ZnPD67D3Nip2UhMcEDsYFVFKetuqzfNBYPfaJu
