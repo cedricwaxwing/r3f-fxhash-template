@@ -1,11 +1,10 @@
-import { Instance, Instances, useGLTF } from "@react-three/drei";
+import { Instance, Instances } from "@react-three/drei";
 import * as THREE from "three";
-import lotusGbl from "../assets/plants/lotus/lotus.glb";
 import { random_choice, random_num } from "../common/utils";
 import { memo, useEffect, useRef } from "react";
 import { useFeatures } from "../common/FeaturesProvider";
 
-function LotusLeaves({ texture }) {
+function LotusLeaves({ texture, lotus }) {
   const { theme } = useFeatures();
   const lotuses = [];
   const num = 90;
@@ -24,7 +23,7 @@ function LotusLeaves({ texture }) {
     lotuses.push(leaf);
   }
 
-  const { nodes, materials } = useGLTF(lotusGbl);
+  const { nodes, materials } = lotus;
   const { map, roughnessMap, heightMap } = materials["Default OBJ"];
 
   return (

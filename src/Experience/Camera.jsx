@@ -3,67 +3,67 @@ import { OrbitControls } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import { fxpreview } from "../fxhash";
 import { useFeatures } from "../common/FeaturesProvider";
+import { screenRecord } from "../common/utils";
 
 export default function CameraAnimation({ canvasRef }) {
-  const [heightScale, setHeightScale] = useState(1);
-  const { recording, zoomRatio, fullscreen } = useFeatures();
-  const { size, gl, camera } = useThree();
+  const { zoomRatio } = useFeatures();
+  const { gl, camera } = useThree();
   const [animationCompleted, setAnimationCompleted] = useState(false);
 
-  const finalZoom = 40 * zoomRatio;
-  const initialRadius = 27;
+  const finalZoom = 48 * zoomRatio;
+  const initialRadius = 28;
   const finalRadius = 32;
-  const animationTime = 7;
+  const animationTime = 5;
   const finalAngle = Math.PI / 4;
-  const baseHeight = 1733 / 2;
 
   const currentZoom = useRef(finalZoom);
 
   const checkAnimationCompletion = (time, animationTime) => {
     if (time >= animationTime && !animationCompleted) {
       const previewFunc = fxpreview();
-      previewFunc(); // Now calling the returned function
+      previewFunc();
+      // screenRecord(canvasRef);
       setAnimationCompleted(true);
     }
   };
 
+  function cubicBezier(t) {
+    let y1 = 0.1,
+      y2 = 0.99;
+    return (
+      (1 - t) ** 3 * 0 +
+      3 * (1 - t) ** 2 * t * y1 +
+      3 * (1 - t) * t ** 2 * y2 +
+      t ** 3 * 1
+    );
+  }
+
   useEffect(() => {
-    setHeightScale(size.height / baseHeight);
     const handleResize = () => {
+      const height = window.innerHeight;
+      const width = window.innerWidth;
+      const heightScale = width / height;
+
       currentZoom.current = finalZoom * heightScale;
-      // Obtain new width and height
-      const width = document.querySelector("canvas").clientWidth;
-      const height =
-        document.querySelector("canvas").clientHeight * heightScale;
-
-      // Update camera properties
-      camera.aspect = 5 / 7;
-      camera.updateProjectionMatrix();
-
-      // Update renderer size
+      camera.zoom = currentZoom.current;
       gl.setSize(width, height);
     };
 
     window.addEventListener("resize", handleResize);
 
-    // Clean up
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [camera, gl]);
+  }, []);
 
   useFrame(({ camera, clock }) => {
-    currentZoom.current = finalZoom * heightScale;
-
     if (animationCompleted) {
-      // camera.zoom = currentZoom.current;
-      // camera.updateProjectionMatrix();
       return;
     }
 
     const time = clock.getElapsedTime();
     let t = Math.min(time / animationTime, 1);
-    const easeOut = 1 - Math.pow(1 - t, 5);
+    const easeOut = cubicBezier(t);
     const easedZoom =
       initialRadius + (currentZoom.current - initialRadius) * easeOut;
     const totalRotation = easeOut * finalAngle;

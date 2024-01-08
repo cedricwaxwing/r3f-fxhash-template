@@ -57,11 +57,12 @@ const CubeGrid = ({ texture }) => {
       envMapIntensity={1.25}
       transmission={0.9}
       backside={true}
-      backsideThickness={2.3}
-      thickness={2.3}
-      distortion={2}
-      roughness={0.15}
-      color={"#fff"}
+      backsideThickness={0.2}
+      thickness={0.15}
+      chromaticAberration={3}
+      distortion={1}
+      distortionScale={1.95}
+      roughness={0.2}
       emissive={lighting}
       emissiveIntensity={0.1}
     />

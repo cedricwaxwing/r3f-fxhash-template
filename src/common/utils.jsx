@@ -1,4 +1,5 @@
 import { fxrand } from "../fxhash";
+import { constants } from "./FeaturesProvider";
 
 export const mapValue = (n, start1, stop1, start2, stop2) => {
   return ((n - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
@@ -50,4 +51,28 @@ export const brightness = (hexColor) => {
   const brightness = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
 
   return brightness;
+};
+
+export const screenRecord = (canvasRef) => {
+  const { name } = constants();
+  if (!canvasRef.current) {
+    console.error("Canvas reference is not available");
+    return;
+  }
+
+  const link = document.createElement("a");
+  link.setAttribute(
+    "download",
+    `avante-garden-${name.toLowerCase().replaceAll(" ", "-")}-${
+      window.$fx.hash
+    }.png`
+  );
+  link.setAttribute(
+    "href",
+    document
+      .querySelector("canvas")
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream")
+  );
+  link.click();
 };

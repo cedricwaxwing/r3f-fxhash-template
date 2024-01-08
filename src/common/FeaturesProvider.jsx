@@ -1,6 +1,12 @@
 import { createContext, memo, useContext } from "react";
 import { registerFeatures } from "../fxhash";
-import { mapValue, random_choice, random_num, brightness } from "./utils";
+import {
+  mapValue,
+  random_choice,
+  random_num,
+  brightness,
+  random_int,
+} from "./utils";
 import CubeData from "./CubeData";
 
 const themes = {
@@ -61,7 +67,7 @@ export const constants = () => {
     name: choice,
     cubes: setup.cubes,
     lines: setup.lines,
-    zoomRatio: random_num(1, 3.5),
+    zoomRatio: Number(random_num(1.25, 4).toFixed(2)),
     config: {
       exponent: setup.exponent,
       boxBevel: random_num(0.05, 0.15),
@@ -90,12 +96,14 @@ function FeaturesProvider({ children }) {
             1.4,
             2.4,
             0,
-            spacingSizes.length
+            spacingSizes.length - 1
           )
         )
       ],
     "Geometry Density":
-      densities[Math.round(mapValue(numGeos, 400, 1024, 0, densities.length))],
+      densities[
+        Math.round(mapValue(numGeos, 400, 1024, 0, densities.length - 1))
+      ],
   });
 
   return (
