@@ -27,5 +27,3 @@ The root `html` file (located in the `public/` folder) can be edited freely so l
 ## Packaging + Release
 
 `npm run release` will build & package into `fxhash-release.zip`, ready to upload to the site.
-
-[Download Test](https://github.com/cedricwaxwing/r3f-fxhash-template/blob/main/public/Strawberry-Theif-01.jpg?raw=true)
