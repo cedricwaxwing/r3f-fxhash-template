@@ -1,8 +1,9 @@
 import { Canvas } from "@react-three/fiber";
 
-import { Perf } from "r3f-perf";
+// import { Perf } from "r3f-perf";
 import Scene from "./Scene";
 import { useRef } from "react";
+import { OrbitControls } from "@react-three/drei";
 
 function Experience() {
   const canvasRef = useRef(null);
@@ -11,17 +12,10 @@ function Experience() {
       <Canvas
         ref={canvasRef}
         shadows
-        orthographic
         gl={{ preserveDrawingBuffer: true }}
         camera={{
-          position: [32, 32, 32],
-          left: -100,
-          right: 100,
-          top: 100,
-          bottom: -100,
-          near: 0.1,
-          far: 100,
-          zoom: 48,
+          position: [0, 0, 10],
+          fov: 40,
         }}
         style={{
           position: "absolute",
@@ -33,6 +27,7 @@ function Experience() {
       >
         <Scene canvasRef={canvasRef} />
         {/* {process.env.NODE_ENV === "development" && <Perf />} */}
+        <OrbitControls />
       </Canvas>
     </div>
   );
