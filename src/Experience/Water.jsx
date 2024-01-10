@@ -1,17 +1,19 @@
 import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Plane, useTexture } from "@react-three/drei";
 import { LayerMaterial, Displace, Noise } from "lamina";
-import { useControls } from "leva";
+import { Leva, useControls } from "leva";
 import { useFeatures } from "../common/FeaturesProvider";
 import { getNoiseColors } from "../common/utils";
+import roughnessMap from "../assets/textures/roughness_map.webp";
 
 const Water = () => {
   const strength = useRef(0.15);
   const speed = useRef(1.8);
   const displaceRef = useRef(null);
   const { theme } = useFeatures();
-  const displace = useTexture("./assets/textures/roughness_map.webp");
+  const displace = useTexture(roughnessMap);
+  const { viewport } = useThree();
 
   const { sheen, sheenColor, clearcoat, clearcoatRoughness, envMapIntensity } =
     useControls({
@@ -19,7 +21,7 @@ const Water = () => {
       sheen: { min: 0, max: 10, value: 3.0 },
       clearcoat: { min: 0, max: 1, value: 0.95 },
       clearcoatRoughness: { min: 0, max: 1, value: 0.15 },
-      envMapIntensity: { min: 0, max: 5, value: 5 },
+      envMapIntensity: { min: 0, max: 5, value: 0.9 },
     });
 
   useFrame((state, dt) => {
@@ -31,7 +33,10 @@ const Water = () => {
   });
 
   return (
-    <group rotation={[-Math.PI / 2, 0, Math.PI / 2]} position={[0, -2, -40]}>
+    <group
+      rotation={[-Math.PI / 2, 0, Math.PI / 2]}
+      position={[0, -((viewport.height / 2) * 0.75), -40]}
+    >
       <Plane args={[100, 200, 256, 512]} receiveShadow>
         <LayerMaterial
           lighting="physical"
