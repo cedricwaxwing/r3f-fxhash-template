@@ -18,8 +18,6 @@ The fxhash host exposes two useful functions, `fxhash` and `fxrand`, which are e
 
 See the [fxhash guide](https://github.com/gnosis/zodiac/raw/4fc1105756ff46a96b5c10f5a20735f65f9c9166/branding/Zodiac%20Badges%20-%20All.zip).
 
-[![Zodiac Badges - All](https://user-images.githubusercontent.com/5009316/142333930-565052ab-a860-4081-b6b5-3c174e5a17a9.png)](https://github.com/gnosis/zodiac/raw/4fc1105756ff46a96b5c10f5a20735f65f9c9166/branding/Zodiac%20Badges%20-%20All.zip)
-
 We also expose a method to register features of your token via `registerFeatures({"feat-a": true})` in the same module.
 
 ### index.html
