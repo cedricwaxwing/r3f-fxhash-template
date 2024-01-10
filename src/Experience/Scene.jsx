@@ -4,6 +4,7 @@ import { useFeatures } from "../common/FeaturesProvider";
 import { mapValue } from "../common/utils";
 import { Suspense } from "react";
 import Grid from "./Grid";
+import Water from "./Water";
 
 export default function Scene() {
   const { theme, lighting, lightingBrightness } = useFeatures();
@@ -31,6 +32,7 @@ export default function Scene() {
         resoltuion={4096}
       />
       <Grid />
+      <Water />
       <SoftShadows size={24} focus={0.88} samples={16} />
     </Suspense>
   );

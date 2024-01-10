@@ -76,3 +76,13 @@ export const screenRecord = (canvasRef) => {
   );
   link.click();
 };
+
+export const getNoiseColors = (colors) => {
+  const shuffledColors = shuffleArray(colors, fxrand());
+  return {
+    colorA: shuffledColors[0],
+    colorB: shuffledColors[1],
+    colorC: shuffledColors[2],
+    colorD: shuffledColors[3],
+  };
+};
