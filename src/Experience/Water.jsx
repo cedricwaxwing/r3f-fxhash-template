@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Plane, useTexture } from "@react-three/drei";
 import { LayerMaterial, Displace, Noise } from "lamina";
-import { Leva, useControls } from "leva";
+import { useControls } from "leva";
 import { useFeatures } from "../common/FeaturesProvider";
 import { getNoiseColors } from "../common/utils";
 import roughnessMap from "../assets/textures/roughness_map.webp";
