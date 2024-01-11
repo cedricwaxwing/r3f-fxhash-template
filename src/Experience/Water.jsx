@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Plane, useTexture } from "@react-three/drei";
 import { LayerMaterial, Displace, Noise } from "lamina";
-import { useControls } from "leva";
+import { useControls, folder } from "leva";
 import { useFeatures } from "../common/FeaturesProvider";
 import { getNoiseColors } from "../common/utils";
 import roughnessMap from "../assets/textures/roughness_map.webp";
@@ -17,11 +17,16 @@ const Water = () => {
 
   const { sheen, sheenColor, clearcoat, clearcoatRoughness, envMapIntensity } =
     useControls({
-      sheenColor: { value: "#1f58b5" },
-      sheen: { min: 0, max: 10, value: 3.0 },
-      clearcoat: { min: 0, max: 1, value: 0.95 },
-      clearcoatRoughness: { min: 0, max: 1, value: 0.15 },
-      envMapIntensity: { min: 0, max: 5, value: 0.9 },
+      water: folder(
+        {
+          sheenColor: { value: "#1f58b5" },
+          sheen: { min: 0, max: 10, value: 3.0 },
+          clearcoat: { min: 0, max: 1, value: 0.95 },
+          clearcoatRoughness: { min: 0, max: 1, value: 0.55 },
+          envMapIntensity: { min: 0, max: 5, value: 0.4 },
+        },
+        { collapsed: true }
+      ),
     });
 
   useFrame((state, dt) => {
@@ -44,11 +49,18 @@ const Water = () => {
           sheen={sheen}
           transmissionMap={displace}
           clearcoat={clearcoat}
-          clearcoatRoughness={clearcoatRoughness}
+          clearcoatRoughness={0}
           envMapIntensity={envMapIntensity}
+          reflectivity={2}
+          metalness={1}
+          roughness={0.7}
         >
           <Displace ref={displaceRef} strength={strength.current} scale={0.5} />
-          <Noise {...getNoiseColors([...theme.colors])} scale={1} />
+          <Noise
+            {...getNoiseColors([...theme.colors])}
+            scale={0.5}
+            alpha={0.5}
+          />
         </LayerMaterial>
       </Plane>
     </group>

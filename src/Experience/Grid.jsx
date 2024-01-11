@@ -16,7 +16,7 @@ export const generateGrid = (colors) => {
   const cubes = [];
   const spheres = [];
   const booleans = [];
-  const columns = random_int(3, 10);
+  const columns = random_int(3, 6);
 
   const seeds = Array.from({ length: Math.pow(columns, 2) }, () =>
     random_num(0, 1)
@@ -26,7 +26,7 @@ export const generateGrid = (colors) => {
     for (let y = 0; y < columns; y += 1) {
       const index = x * columns + y;
       const seed = seeds[index];
-      if (seed < 0.33) {
+      if (seed < 0.23) {
         cubes.push({
           position: [x, y, random_num(-0.015, 0.015)],
           scale: 0.99,
@@ -37,7 +37,7 @@ export const generateGrid = (colors) => {
             random_num(-0.015, 0.015),
           ],
         });
-      } else if (seed < 0.67) {
+      } else if (seed < 0.5) {
         spheres.push({
           position: [x, y, random_num(-0.015, 0.015)],
           scale: 0.99,

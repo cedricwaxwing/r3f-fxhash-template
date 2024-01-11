@@ -8,6 +8,7 @@ import {
 } from "../common/utils";
 import { useFeatures } from "../common/FeaturesProvider";
 import { Material } from "./Grid";
+import { Cone } from "@react-three/drei";
 
 const positionMapping = (position) => {
   const positions = {
@@ -120,65 +121,80 @@ const BooleanObject = ({
     tube: random_num(0.005, 0.02),
   };
 
-  const hasCuts = [cutTopLeft, cutTopRight, cutBottomLeft, cutBottomRight].some(
-    (cut) => cut
-  );
+  const hasCuts = cuts.some((cut) => cut);
+
+  const topEmpty = cuts[0] && cuts[1] && !cuts[2] && !cuts[3];
+  const bottomEmpty = !cuts[0] && !cuts[1] && cuts[2] && cuts[3];
 
   return (
     <group position={position} scale={scale}>
       {/* Platform */}
-      {(sphereAbove || booleanAbove) && (
-        <mesh position-y={0.5}>
+      {(sphereAbove || booleanAbove) && !topEmpty && (
+        <mesh castShadow receiveShadow position-y={0.5}>
           <cylinderGeometry args={[0.5, 0.5, 0.025, 64, 1]} />
           <Material color={random_choice(theme.colors)} />
         </mesh>
       )}
-      {(sphereBelow || booleanBelow) && (
-        <mesh position-y={-0.5}>
+      {(sphereBelow || booleanBelow) && !bottomEmpty && (
+        <mesh castShadow receiveShadow position-y={-0.5}>
           <cylinderGeometry args={[0.5, 0.5, 0.025, 64, 1]} />
           <Material color={random_choice(theme.colors)} />
         </mesh>
       )}
-      {/* Rings */}
       <group>
-        {[...Array(rings)].map((_, i) => {
-          const radius = mapValue(i + 1, 0, rings + 1, 0.05, 0.48);
-          return (
-            <mesh key={i}>
-              <torusGeometry args={[radius, tube, 16, 100]} />
+        {topEmpty || bottomEmpty ? (
+          <>
+            <Cone
+              args={[0.5, 0.5, 64]}
+              position-y={topEmpty ? 0.25 : -0.25}
+              rotation-x={bottomEmpty && Math.PI}
+            >
               <Material color={random_choice(theme.colors)} />
-            </mesh>
-          );
-        })}
-        {/* Poles */}
-        <mesh>
-          <Material color="white" />
-          <Geometry>
-            <EmptyBase />
-            <Addition position-x={-0.45}>
-              <cylinderGeometry args={[0.01, 0.01, 1, 16, 1]} />
-            </Addition>
-            <Addition position-x={0.45}>
-              <cylinderGeometry args={[0.01, 0.01, 1, 16, 1]} />
-            </Addition>
-            {hasCuts && (
-              <Intersection>
-                <Cut
-                  cutTopLeft={cutTopLeft}
-                  cutTopRight={cutTopRight}
-                  cutBottomLeft={cutBottomLeft}
-                  cutBottomRight={cutBottomRight}
-                />
-              </Intersection>
-            )}
-          </Geometry>
-        </mesh>
+            </Cone>
+          </>
+        ) : (
+          <>
+            {[...Array(rings)].map((_, i) => {
+              const radius = mapValue(i + 1, 0, rings + 1, 0.05, 0.48);
+              return (
+                <mesh castShadow receiveShadow key={i}>
+                  <torusGeometry args={[radius, tube, 16, 100]} />
+                  <Material color={random_choice(theme.colors)} />
+                </mesh>
+              );
+            })}
+          </>
+        )}
+        {!(topEmpty || bottomEmpty) && (
+          <mesh castShadow receiveShadow>
+            <Material color="white" />
+            <Geometry>
+              <EmptyBase />
+              <Addition position-x={-0.45}>
+                <cylinderGeometry args={[0.01, 0.01, 1, 16, 1]} />
+              </Addition>
+              <Addition position-x={0.45}>
+                <cylinderGeometry args={[0.01, 0.01, 1, 16, 1]} />
+              </Addition>
+              {hasCuts && (
+                <Intersection>
+                  <Cut
+                    cutTopLeft={cutTopLeft}
+                    cutTopRight={cutTopRight}
+                    cutBottomLeft={cutBottomLeft}
+                    cutBottomRight={cutBottomRight}
+                  />
+                </Intersection>
+              )}
+            </Geometry>
+          </mesh>
+        )}
       </group>
       {/* Sphere */}
       {pieces &&
         pieces.map((piece, i) => {
           return (
-            <mesh key={i}>
+            <mesh castShadow receiveShadow key={i}>
               <Geometry>
                 <Base>
                   <sphereGeometry args={[0.5, 64, 64]} />
