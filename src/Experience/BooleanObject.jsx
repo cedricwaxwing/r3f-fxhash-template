@@ -8,7 +8,8 @@ import {
 } from "../common/utils";
 import { useFeatures } from "../common/FeaturesProvider";
 import { Material } from "./Grid";
-import { Cone } from "@react-three/drei";
+import { Cone, MeshTransmissionMaterial, useTexture } from "@react-three/drei";
+import roughnessTexture from "../assets/textures/roughness_map.webp";
 
 const positionMapping = (position) => {
   const positions = {
@@ -37,6 +38,7 @@ const generateShapeConfig = (colors) => {
         pieces.push({
           position: ["top-left", "top-right", "bottom-left", "bottom-right"][i],
           color: random_choice(colors),
+          seed: random_num(0, 1),
         });
       }
     });
@@ -104,6 +106,7 @@ const BooleanObject = ({
 }) => {
   const { theme } = useFeatures();
   const { cuts, pieces } = generateShapeConfig(theme.colors);
+  const texture = useTexture(roughnessTexture);
 
   const {
     cutTopLeft,
@@ -206,6 +209,13 @@ const BooleanObject = ({
                   <boxGeometry />
                 </Intersection>
               </Geometry>
+              {/* <MeshTransmissionMaterial
+                  thickness={0.3}
+                  distortion={1}
+                  roughness={0.1}
+                  bumpMap={texture}
+                  bumpScale={0.1}
+                /> */}
               <Material color={piece.color} />
             </mesh>
           );

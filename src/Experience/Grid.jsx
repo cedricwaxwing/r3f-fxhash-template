@@ -1,22 +1,31 @@
 import {
+  AccumulativeShadows,
+  Backdrop,
   Center,
+  ContactShadows,
+  Cylinder,
   Instance,
   Instances,
+  MeshReflectorMaterial,
+  RandomizedLight,
   Resize,
   useTexture,
 } from "@react-three/drei";
 import { useFeatures } from "../common/FeaturesProvider";
 import { random_choice, random_int, random_num } from "../common/utils";
-import { useThree } from "@react-three/fiber";
 import { memo, useEffect, useRef, useState } from "react";
 import concrete from "../assets/textures/TCom_GenericBrickSurface_New_4K_roughness.webp";
 import BooleanObject from "./BooleanObject";
+import { useThree } from "@react-three/fiber";
+import { useControls } from "leva";
+
+let columns;
 
 export const generateGrid = (colors) => {
   const cubes = [];
   const spheres = [];
   const booleans = [];
-  const columns = random_int(3, 6);
+  columns = random_int(3, 6);
 
   const seeds = Array.from({ length: Math.pow(columns, 2) }, () =>
     random_num(0, 1)
@@ -71,7 +80,7 @@ export const Material = ({ color }) => {
 };
 
 const Grid = () => {
-  const { cubes, spheres, booleans } = useFeatures();
+  const { theme, cubes, spheres, booleans } = useFeatures();
   const { width, height } = useThree((state) => state.viewport);
   const [vMin, setVmin] = useState(Math.min(width, height));
 
@@ -125,8 +134,9 @@ const Grid = () => {
 
   return (
     <>
-      <Resize precise scale={vMin * 0.8}>
-        <Center position={0}>
+      {/* <Resize precise scale={vMin * 0.8}> */}
+      <Center position={0}>
+        <group>
           <Instances limit={cubes.length}>
             <Material />
             <boxGeometry />
@@ -174,8 +184,26 @@ const Grid = () => {
                 );
               }
             )}
-        </Center>
-      </Resize>
+          {/* <group position={[columns / 2 - 0.5, -0.62, 0]}>
+            <Cylinder
+              receiveShadow
+              args={[columns * 1.05, columns * 1.05, 0.25, 128, 1]}
+            >
+              <meshPhysicalMaterial color="#999" roughness={0.5} />
+            </Cylinder>
+            <ContactShadows
+              opacity={1}
+              position-y={0.126}
+              scale={columns * 1.5}
+              blur={10}
+              resolution={256}
+              color="#000"
+              frames={1}
+            />
+          </group> */}
+        </group>
+      </Center>
+      {/* </Resize> */}
     </>
   );
 };
