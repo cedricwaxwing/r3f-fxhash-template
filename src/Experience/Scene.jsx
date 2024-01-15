@@ -3,9 +3,8 @@ import { useFeatures } from "../common/FeaturesProvider";
 import { mapValue } from "../common/utils";
 import { Suspense } from "react";
 import Grid from "./Grid";
-import wideStreetHdr from "../assets/hdri/wide_street_02_4k.hdr";
 import Water from "./Water";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
 
 export default function Scene() {
   const { theme, lighting, lightingBrightness } = useFeatures();
@@ -32,8 +31,7 @@ export default function Scene() {
           />
         </directionalLight>
         <Sky scale={10000} sunPosition={[50, 60, 50]} />
-        {/* <color attach="background" args={[theme.background[1]]} /> */}
-        {/* <fog attach="fog" args={[theme.background[1], 10, 15]} /> */}
+        <fog attach="fog" args={[theme.background[1], 10, 15]} />
         <Environment preset="sunset" resoltuion={4096} />
         <Grid />
         <Water position={[0, -(viewport.height / 2) * 0.7, 0]} />

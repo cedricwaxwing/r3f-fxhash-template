@@ -8,12 +8,7 @@ import {
 } from "../common/utils";
 import { useFeatures } from "../common/FeaturesProvider";
 import { Material } from "./Grid";
-import {
-  Cone,
-  MeshReflectorMaterial,
-  MeshTransmissionMaterial,
-  useTexture,
-} from "@react-three/drei";
+import { Cone, MeshTransmissionMaterial, useTexture } from "@react-three/drei";
 import roughnessTexture from "../assets/textures/TCom_GenericBrickSurface_New_4K_roughness.webp";
 
 const positionMapping = (position) => {
@@ -210,6 +205,9 @@ const BooleanObject = ({
       {/* Sphere */}
       {pieces &&
         pieces.map((piece, i) => {
+          {
+            seeds[i] > 0.2 && console.log("glass");
+          }
           return (
             <mesh castShadow receiveShadow key={i}>
               <Geometry>
@@ -220,10 +218,16 @@ const BooleanObject = ({
                   scale={[0.5, 0.5, 1]}
                   position={positionMapping(piece.position)}
                 >
-                  <boxGeometry />
+                  <boxGeometry
+                    args={[
+                      seeds[i] < 0.2 ? 0.99 : 1,
+                      seeds[i] < 0.2 ? 0.99 : 1,
+                      1,
+                    ]}
+                  />
                 </Intersection>
               </Geometry>
-              {seeds[i] < 0.1 ? (
+              {seeds[i] < 0.2 ? (
                 <MeshTransmissionMaterial
                   thickness={0.25}
                   distortion={1}
@@ -231,13 +235,10 @@ const BooleanObject = ({
                   backside
                   backsideThickness={0.3}
                   backsideResolution={4096}
-                  sheen={0.5}
-                  sheenColor={piece.color}
-                  sheenRoughness={0.9}
                   iridescence={2}
                   iridescenceMap={texture}
                 />
-              ) : seeds[i] < 0.3 ? (
+              ) : seeds[i] < 0.21 ? (
                 <meshPhysicalMaterial
                   metalness={1}
                   roughness={0.29}

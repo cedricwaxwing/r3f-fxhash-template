@@ -1,13 +1,7 @@
 import {
-  AccumulativeShadows,
-  Backdrop,
   Center,
-  ContactShadows,
-  Cylinder,
   Instance,
   Instances,
-  MeshReflectorMaterial,
-  RandomizedLight,
   Resize,
   useTexture,
 } from "@react-three/drei";
@@ -17,7 +11,6 @@ import { memo, useEffect, useRef, useState } from "react";
 import concrete from "../assets/textures/TCom_GenericBrickSurface_New_4K_roughness.webp";
 import BooleanObject from "./BooleanObject";
 import { useThree } from "@react-three/fiber";
-import { useControls } from "leva";
 
 let columns;
 
@@ -84,7 +77,7 @@ export const Material = ({ color }) => {
 };
 
 const Grid = () => {
-  const { theme, cubes, spheres, booleans } = useFeatures();
+  const { cubes, spheres, booleans } = useFeatures();
   const { width, height } = useThree((state) => state.viewport);
   const [vMin, setVmin] = useState(Math.min(width, height));
 
