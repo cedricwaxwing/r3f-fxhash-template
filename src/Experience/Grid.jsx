@@ -73,7 +73,11 @@ export const Material = ({ color }) => {
       metalness={0.7}
       bumpMap={roughnessMap}
       bumpScale={0.9}
+      sheen={0.5}
+      sheenColor={color}
+      sheenRoughness={0.9}
       roughnessMap={roughnessMap}
+      iridescenceMap={roughnessMap}
       color={color}
     />
   );
@@ -134,57 +138,57 @@ const Grid = () => {
 
   return (
     <>
-      {/* <Resize precise scale={vMin * 0.8}> */}
-      <Center position={0}>
-        <group>
-          <Instances limit={cubes.length}>
-            <Material />
-            <boxGeometry />
-            {cubes.map(({ color, ...cube }, i) => {
-              return <Cube key={i} color={color} {...cube} />;
-            })}
-          </Instances>
-          <Instances limit={spheres.length}>
-            <Material />
-            <sphereGeometry args={[0.5, 64, 64]} />
-            {spheres.map(({ color, ...sphere }, i) => {
-              return <Sphere key={i} color={color} {...sphere} />;
-            })}
-          </Instances>
-          {booleans &&
-            booleans.map(
-              (
-                {
-                  scale,
-                  position,
-                  rotation,
-                  sphereAbove,
-                  sphereBelow,
-                  cubeAbove,
-                  cubeBelow,
-                  booleanAbove,
-                  booleanBelow,
-                },
-                i
-              ) => {
-                return (
-                  <BooleanObject
-                    key={i}
-                    position={position}
-                    scale={scale}
-                    rotation={rotation}
-                    sphereAbove={sphereAbove}
-                    sphereBelow={sphereBelow}
-                    cubeAbove={cubeAbove}
-                    cubeBelow={cubeBelow}
-                    booleanAbove={booleanAbove}
-                    booleanBelow={booleanBelow}
-                    material={<Material />}
-                  />
-                );
-              }
-            )}
-          {/* <group position={[columns / 2 - 0.5, -0.62, 0]}>
+      <Resize precise scale={vMin * 0.8}>
+        <Center position={0}>
+          <group>
+            <Instances limit={cubes.length}>
+              <Material />
+              <boxGeometry />
+              {cubes.map(({ color, ...cube }, i) => {
+                return <Cube key={i} color={color} {...cube} />;
+              })}
+            </Instances>
+            <Instances limit={spheres.length}>
+              <Material />
+              <sphereGeometry args={[0.5, 64, 64]} />
+              {spheres.map(({ color, ...sphere }, i) => {
+                return <Sphere key={i} color={color} {...sphere} />;
+              })}
+            </Instances>
+            {booleans &&
+              booleans.map(
+                (
+                  {
+                    scale,
+                    position,
+                    rotation,
+                    sphereAbove,
+                    sphereBelow,
+                    cubeAbove,
+                    cubeBelow,
+                    booleanAbove,
+                    booleanBelow,
+                  },
+                  i
+                ) => {
+                  return (
+                    <BooleanObject
+                      key={i}
+                      position={position}
+                      scale={scale}
+                      rotation={rotation}
+                      sphereAbove={sphereAbove}
+                      sphereBelow={sphereBelow}
+                      cubeAbove={cubeAbove}
+                      cubeBelow={cubeBelow}
+                      booleanAbove={booleanAbove}
+                      booleanBelow={booleanBelow}
+                      material={<Material />}
+                    />
+                  );
+                }
+              )}
+            {/* <group position={[columns / 2 - 0.5, -0.62, 0]}>
             <Cylinder
               receiveShadow
               args={[columns * 1.05, columns * 1.05, 0.25, 128, 1]}
@@ -201,9 +205,9 @@ const Grid = () => {
               frames={1}
             />
           </group> */}
-        </group>
-      </Center>
-      {/* </Resize> */}
+          </group>
+        </Center>
+      </Resize>
     </>
   );
 };

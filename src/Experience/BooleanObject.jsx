@@ -8,8 +8,13 @@ import {
 } from "../common/utils";
 import { useFeatures } from "../common/FeaturesProvider";
 import { Material } from "./Grid";
-import { Cone, MeshTransmissionMaterial, useTexture } from "@react-three/drei";
-import roughnessTexture from "../assets/textures/roughness_map.webp";
+import {
+  Cone,
+  MeshReflectorMaterial,
+  MeshTransmissionMaterial,
+  useTexture,
+} from "@react-three/drei";
+import roughnessTexture from "../assets/textures/TCom_GenericBrickSurface_New_4K_roughness.webp";
 
 const positionMapping = (position) => {
   const positions = {
@@ -129,6 +134,15 @@ const BooleanObject = ({
   const topEmpty = cuts[0] && cuts[1] && !cuts[2] && !cuts[3];
   const bottomEmpty = !cuts[0] && !cuts[1] && cuts[2] && cuts[3];
 
+  const seeds = [
+    random_num(0, 1),
+    random_num(0, 1),
+    random_num(0, 1),
+    random_num(0, 1),
+  ];
+
+  const showCone = topEmpty || bottomEmpty;
+
   return (
     <group position={position} scale={scale}>
       {/* Platform */}
@@ -145,7 +159,7 @@ const BooleanObject = ({
         </mesh>
       )}
       <group>
-        {topEmpty || bottomEmpty ? (
+        {showCone ? (
           <>
             <Cone
               args={[0.5, 0.5, 64]}
@@ -168,7 +182,7 @@ const BooleanObject = ({
             })}
           </>
         )}
-        {!(topEmpty || bottomEmpty) && (
+        {!showCone && (
           <mesh castShadow receiveShadow>
             <Material color="white" />
             <Geometry>
@@ -209,14 +223,37 @@ const BooleanObject = ({
                   <boxGeometry />
                 </Intersection>
               </Geometry>
-              {/* <MeshTransmissionMaterial
-                  thickness={0.3}
+              {seeds[i] < 0.1 ? (
+                <MeshTransmissionMaterial
+                  thickness={0.25}
                   distortion={1}
                   roughness={0.1}
+                  backside
+                  backsideThickness={0.3}
+                  backsideResolution={4096}
+                  sheen={0.5}
+                  sheenColor={piece.color}
+                  sheenRoughness={0.9}
+                  iridescence={2}
+                  iridescenceMap={texture}
+                />
+              ) : seeds[i] < 0.3 ? (
+                <meshPhysicalMaterial
+                  metalness={1}
+                  roughness={0.29}
                   bumpMap={texture}
-                  bumpScale={0.1}
-                /> */}
-              <Material color={piece.color} />
+                  bumpScale={0.4}
+                  sheen={0.5}
+                  sheenColor={piece.color}
+                  sheenRoughness={0.9}
+                  iridescenceMap={texture}
+                  envMapIntensity={0.5}
+                  reflectivity={2}
+                  color={piece.color}
+                />
+              ) : (
+                <Material color={piece.color} />
+              )}
             </mesh>
           );
         })}

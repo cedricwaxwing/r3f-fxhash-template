@@ -14,7 +14,7 @@ function Experience() {
         shadows
         gl={{ preserveDrawingBuffer: true }}
         camera={{
-          position: [0, 0, 10],
+          position: [0, -1.33, 10],
           fov: 40,
         }}
         style={{
@@ -27,7 +27,11 @@ function Experience() {
       >
         <Scene canvasRef={canvasRef} />
         {/* {process.env.NODE_ENV === "development" && <Perf />} */}
-        <OrbitControls />
+        <OrbitControls
+          target={[0, 0, 0]}
+          maxPolarAngle={Math.PI * 2}
+          minPolarAngle={0}
+        />
       </Canvas>
     </div>
   );
