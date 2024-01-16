@@ -1,5 +1,4 @@
 import { fxrand } from "../fxhash";
-import { constants } from "./FeaturesProvider";
 
 export const mapValue = (n, start1, stop1, start2, stop2) => {
   return ((n - start1) / (stop1 - start1)) * (stop2 - start2) + start2;
@@ -53,8 +52,7 @@ export const brightness = (hexColor) => {
   return brightness;
 };
 
-export const screenRecord = (canvasRef) => {
-  const { name } = constants();
+export const screenRecord = (canvasRef, name) => {
   if (!canvasRef.current) {
     console.error("Canvas reference is not available");
     return;

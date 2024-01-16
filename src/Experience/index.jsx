@@ -2,7 +2,7 @@ import { Canvas } from "@react-three/fiber";
 
 // import { Perf } from "r3f-perf";
 import Scene from "./Scene";
-import { useRef } from "react";
+import { memo, useRef } from "react";
 import { OrbitControls } from "@react-three/drei";
 
 function Experience() {
@@ -42,4 +42,4 @@ function Experience() {
   );
 }
 
-export default Experience;
+export default memo(Experience);

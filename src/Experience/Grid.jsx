@@ -9,6 +9,7 @@ const Grid = () => {
   const { grid } = useFeatures();
   const { width, height } = useThree((state) => state.viewport);
   const [vMin, setVmin] = useState(Math.min(width, height));
+  console.log(grid);
 
   useEffect(() => {
     setVmin(Math.min(height, width));

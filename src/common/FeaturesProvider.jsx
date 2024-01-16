@@ -1,7 +1,9 @@
-import { createContext, memo, useContext } from "react";
+import { createContext, useContext, useMemo } from "react";
 import { registerFeatures } from "../fxhash";
 import { random_choice } from "./utils";
 import { generateGrid } from "../Experience/GridFactory";
+
+export const FeaturesContext = createContext(null);
 
 const themes = {
   Minimal: {
@@ -36,28 +38,26 @@ const timeOfDay = [
   },
 ];
 
-const choice = random_choice(Object.keys(themes));
-const activeTime = random_choice(timeOfDay);
-const grid = generateGrid(themes[choice].colors);
+const FeaturesProvider = ({ children }) => {
+  const choice = useMemo(() => random_choice(Object.keys(themes)), []);
+  const activeTime = useMemo(() => random_choice(timeOfDay), []);
+  const grid = useMemo(() => generateGrid(themes[choice].colors), [choice]);
 
-export const constants = () => {
-  const lighting = random_choice(themes[choice].lighting);
-  return {
-    theme: themes[choice],
-    lighting: lighting,
-    grid: grid,
-    name: choice,
-    envRotation: activeTime.rotation,
-    envIntensity: activeTime.intensity,
-    time: activeTime.time,
-    timeOfDay: activeTime,
-  };
-};
+  const constantsData = useMemo(() => {
+    const lighting = random_choice(themes[choice].lighting);
+    return {
+      name: choice,
+      theme: themes[choice],
+      lighting: lighting,
+      grid: grid,
+      name: choice,
+      envRotation: activeTime.rotation,
+      envIntensity: activeTime.intensity,
+      time: activeTime.time,
+      timeOfDay: activeTime,
+    };
+  }, [grid, choice, activeTime]);
 
-const constantsData = constants();
-const FeaturesContext = createContext();
-
-function FeaturesProvider({ children }) {
   registerFeatures({
     theme: choice,
     time: constantsData.time,
@@ -68,11 +68,8 @@ function FeaturesProvider({ children }) {
       {children}
     </FeaturesContext.Provider>
   );
-}
-
-export default memo(FeaturesProvider);
-
-export const useFeatures = () => {
-  const features = useContext(FeaturesContext);
-  return features;
 };
+
+export const useFeatures = () => useContext(FeaturesContext);
+
+export default FeaturesProvider;
