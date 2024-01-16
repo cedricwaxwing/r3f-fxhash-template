@@ -21,6 +21,8 @@ export default function Scene() {
   const { viewport } = useThree();
   const groundY = -(viewport.height / 2) * 0.8;
 
+  console.log("scene");
+
   return (
     <>
       <Suspense fallback={null}>

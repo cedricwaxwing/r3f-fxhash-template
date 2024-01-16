@@ -84,7 +84,7 @@ export const createBoolean = (x, y, grid, columns, themeColors) => {
   const booleanObject = {
     type: 'boolean',
     position: [x, y, random_num(-0.015, 0.015)],
-    scale: 1,
+    scale: 0.9999,
     rotation: 0,
     cuts: cuts,
     pieces: pieces,
