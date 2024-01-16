@@ -1,4 +1,11 @@
-import { Center, Instance, Instances, Resize } from "@react-three/drei";
+import {
+  Center,
+  ContactShadows,
+  Cylinder,
+  Instance,
+  Instances,
+  Resize,
+} from "@react-three/drei";
 import { useFeatures } from "../common/FeaturesProvider";
 import { random_choice, random_int, random_num } from "../common/utils";
 import { memo, useEffect, useRef, useState } from "react";
@@ -22,7 +29,7 @@ export const generateGrid = (colors) => {
     for (let y = 0; y < columns; y += 1) {
       const index = x * columns + y;
       const seed = seeds[index];
-      if (seed < 0.23) {
+      if (seed < 0.13) {
         cubes.push({
           position: [x, y, random_num(-0.0015, 0.0015)],
           scale: 0.99,
@@ -33,7 +40,7 @@ export const generateGrid = (colors) => {
             random_num(-0.015, 0.015),
           ],
         });
-      } else if (seed < 0.5) {
+      } else if (seed < 0.4) {
         spheres.push({
           position: [x, y, random_num(-0.015, 0.015)],
           scale: 0.99,
@@ -158,22 +165,19 @@ const Grid = () => {
                 }
               )}
             {/* <group position={[columns / 2 - 0.5, -0.62, 0]}>
-            <Cylinder
-              receiveShadow
-              args={[columns * 1.05, columns * 1.05, 0.25, 128, 1]}
-            >
-              <meshPhysicalMaterial color="#999" roughness={0.5} />
-            </Cylinder>
-            <ContactShadows
-              opacity={1}
-              position-y={0.126}
-              scale={columns * 1.5}
-              blur={10}
-              resolution={256}
-              color="#000"
-              frames={1}
-            />
-          </group> */}
+              <Cylinder
+                receiveShadow
+                args={[
+                  (columns / 2) * 1.05,
+                  (columns / 2) * 1.05,
+                  0.25,
+                  128,
+                  1,
+                ]}
+              >
+                <meshPhysicalMaterial color="#999" roughness={0.5} />
+              </Cylinder>
+            </group> */}
           </group>
         </Center>
       </Resize>

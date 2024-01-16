@@ -2,6 +2,8 @@ import * as THREE from "three";
 import { useMemo } from "react";
 import { createNoise2D } from "simplex-noise";
 import { useFeatures } from "../common/FeaturesProvider";
+import { Gradient, LayerMaterial, Noise } from "lamina";
+import { blendColors } from "../common/utils";
 
 const Hills = ({
   numPoints = 800,
@@ -73,7 +75,26 @@ const Hills = ({
 
   return (
     <mesh position={position} geometry={hillsGeometry}>
-      <meshBasicMaterial color={theme.hills} />
+      {/* <meshBasicMaterial color={theme.hills} /> */}
+      <LayerMaterial lighting="standard">
+        <Gradient
+          colorA={theme.hills}
+          colorB={blendColors("#000000", theme.hills)}
+          axes="y"
+          start={maxHeight * 2}
+          end={0}
+        />
+        <Noise
+          colorA="#000"
+          colorB="#fff"
+          colorC="#666"
+          colorD="#eee"
+          mode="overlay"
+          alpha={1}
+          scale={0.1}
+          type="simplex"
+        />
+      </LayerMaterial>
     </mesh>
   );
 };

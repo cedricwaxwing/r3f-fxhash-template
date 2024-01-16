@@ -1,4 +1,3 @@
-import { SoftShadows } from "@react-three/drei";
 import { useFeatures } from "../common/FeaturesProvider";
 import { Suspense } from "react";
 import Env from "./Env";
@@ -10,34 +9,37 @@ import {
   BrightnessContrast,
   DepthOfField,
   EffectComposer,
+  ToneMapping,
+  SSAO,
+  Vignette,
 } from "@react-three/postprocessing";
 import { Color } from "three";
+import { BlendFunction, SSAOEffect } from "postprocessing";
 
 export default function Scene() {
   const { theme, lighting } = useFeatures();
   const { viewport } = useThree();
-  const groundY = -(viewport.height / 2) * 0.78;
+  const groundY = -(viewport.height / 2) * 0.8;
 
   return (
     <>
       <Suspense fallback={null}>
-        <Env />
         <Grid groundY={groundY} />
         <Hills
-          position={[-30, groundY, -35]}
+          position={[-30, groundY, -55]}
           maxHeight={6}
           width={70}
           intensity={0.8}
         />
         <Hills
-          position={[-22, groundY, -31]}
+          position={[-22, groundY, -40]}
           maxHeight={6}
           width={30}
           intensity={0.5}
           easingPoint={0.8}
         />
         <Hills
-          position={[-26, groundY, -28]}
+          position={[-26, groundY, -35]}
           maxHeight={3}
           width={40}
           intensity={0.3}
@@ -49,16 +51,19 @@ export default function Scene() {
           fog
           distortionScale={2}
         />
-        <SoftShadows size={32} focus={0.1} samples={48} />
+        <Env groundY={groundY} />
       </Suspense>
       <EffectComposer>
         <DepthOfField
-          worldFocusDistance={9.5}
+          worldFocusDistance={10}
           worldFocusRange={10}
-          bokehScale={8}
+          bokehScale={3}
           resolutionScale={1}
         />
-        <BrightnessContrast brightness={-0.1} contrast={0.05} />
+        <ToneMapping blendFunction={BlendFunction.SOFT_LIGHT} whitePoint={2} />
+        <BrightnessContrast brightness={-0.02} contrast={0.2} />
+        <SSAO />
+        <Vignette opacity={0.6} />
       </EffectComposer>
     </>
   );

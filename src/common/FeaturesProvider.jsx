@@ -1,6 +1,6 @@
 import { createContext, memo, useContext } from "react";
 import { registerFeatures } from "../fxhash";
-import { random_choice, brightness } from "./utils";
+import { random_choice, random_num, brightness } from "./utils";
 import { generateGrid } from "../Experience/Grid";
 
 const themes = {
@@ -8,11 +8,13 @@ const themes = {
     background: "#828ae3",
     lighting: ["#eaecd2", "#fbf7e0"],
     hills: "#646679",
-    colors: ["#ebebeb", "#a3d5bb", "#b7bbeb"],
+    colors: ["#f6f5f5", "#c8cbea", "#edd8f1"],
   },
 };
 
 const choice = random_choice(Object.keys(themes));
+const envRotation = random_choice([-0.1, -2.4, 2.0]);
+const intensity = random_num(0.5, 1);
 
 export const constants = () => {
   const { cubes, spheres, booleans } = generateGrid(themes[choice].colors);
@@ -25,6 +27,8 @@ export const constants = () => {
     cubes: cubes,
     spheres: spheres,
     booleans: booleans,
+    envRotation: envRotation,
+    envIntensity: intensity,
   };
 };
 

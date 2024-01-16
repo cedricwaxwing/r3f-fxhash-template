@@ -15,9 +15,8 @@ function Experience() {
         gl={{
           preserveDrawingBuffer: true,
           powerPreference: "high-performance",
-          antialias: false,
+          antialias: true,
           stencil: false,
-          // depth: false,
         }}
         camera={{
           position: [0, -1.33, 10],

@@ -8,12 +8,14 @@ export const PhysicalMaterial = ({ color }) => {
       envMapIntensity={1.3}
       metalness={0.7}
       bumpMap={texture}
-      bumpScale={3}
-      sheen={0.5}
+      bumpScale={1}
+      sheen={2}
       sheenColor={color}
-      sheenRoughness={0.9}
-      texture={texture}
-      iridescenceMap={texture}
+      sheenRoughness={0.2}
+      clearcoat={0.3}
+      clearcoatRoughness={0.4}
+      clearcoatRoughnessMap={texture}
+      clearcoatMap={texture}
       color={color}
     />
   );
@@ -25,12 +27,14 @@ export const MetalMaterial = ({ color }) => {
     <meshPhysicalMaterial
       metalness={1}
       roughness={0.29}
-      bumpMap={texture}
-      bumpScale={3}
-      sheen={0.5}
+      // bumpMap={texture}
+      // bumpScale={3}
+      sheen={2}
       sheenColor={color}
       sheenRoughness={0.9}
-      iridescenceMap={texture}
+      clearcoat={0.3}
+      // clearcoatRoughnessMap={texture}
+      // iridescenceMap={texture}
       envMapIntensity={1.3}
       reflectivity={2}
       color={color}

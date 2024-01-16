@@ -56,7 +56,7 @@ const generateShapeConfig = (colors) => {
 
 const EmptyBase = () => {
   return (
-    <Base scale={[0.000001, 0.000001, 1]}>
+    <Base scale={[0.000001, 0.000001, 1]} castShadow receiveShadow>
       <boxGeometry />
     </Base>
   );
@@ -67,17 +67,29 @@ const Cut = ({ cutTopLeft, cutTopRight, cutBottomLeft, cutBottomRight }) => {
     <Geometry>
       <EmptyBase />
       {cutTopLeft && (
-        <Addition scale={[0.5, 0.5, 1]} position={positionMapping("top-left")}>
+        <Addition
+          castShadow
+          receiveShadow
+          scale={[0.5, 0.5, 1]}
+          position={positionMapping("top-left")}
+        >
           <boxGeometry />
         </Addition>
       )}
       {cutTopRight && (
-        <Addition scale={[0.5, 0.5, 1]} position={positionMapping("top-right")}>
+        <Addition
+          castShadow
+          receiveShadow
+          scale={[0.5, 0.5, 1]}
+          position={positionMapping("top-right")}
+        >
           <boxGeometry />
         </Addition>
       )}
       {cutBottomLeft && (
         <Addition
+          castShadow
+          receiveShadow
           scale={[0.5, 0.5, 1]}
           position={positionMapping("bottom-left")}
         >
@@ -86,6 +98,8 @@ const Cut = ({ cutTopLeft, cutTopRight, cutBottomLeft, cutBottomRight }) => {
       )}
       {cutBottomRight && (
         <Addition
+          castShadow
+          receiveShadow
           scale={[0.5, 0.5, 1]}
           position={positionMapping("bottom-right")}
         >
@@ -163,6 +177,8 @@ const BooleanObject = ({
               args={[0.5, 0.5, 64]}
               position-y={topEmpty ? 0.25 : -0.25}
               rotation-x={bottomEmpty && Math.PI}
+              castShadow
+              receiveShadow
             >
               <PhysicalMaterial color={random_choice(theme.colors)} />
             </Cone>
