@@ -12,7 +12,13 @@ function Experience() {
       <Canvas
         ref={canvasRef}
         shadows
-        gl={{ preserveDrawingBuffer: true }}
+        gl={{
+          preserveDrawingBuffer: true,
+          powerPreference: "high-performance",
+          antialias: false,
+          stencil: false,
+          // depth: false,
+        }}
         camera={{
           position: [0, -1.33, 10],
           fov: 40,

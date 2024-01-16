@@ -1,16 +1,10 @@
-import {
-  Center,
-  Instance,
-  Instances,
-  Resize,
-  useTexture,
-} from "@react-three/drei";
+import { Center, Instance, Instances, Resize } from "@react-three/drei";
 import { useFeatures } from "../common/FeaturesProvider";
 import { random_choice, random_int, random_num } from "../common/utils";
 import { memo, useEffect, useRef, useState } from "react";
-import concrete from "../assets/textures/TCom_GenericBrickSurface_New_4K_roughness.webp";
 import BooleanObject from "./BooleanObject";
 import { useThree } from "@react-three/fiber";
+import { PhysicalMaterial } from "./Materials";
 
 let columns;
 
@@ -18,7 +12,7 @@ export const generateGrid = (colors) => {
   const cubes = [];
   const spheres = [];
   const booleans = [];
-  columns = random_int(3, 6);
+  columns = random_int(3, 4);
 
   const seeds = Array.from({ length: Math.pow(columns, 2) }, () =>
     random_num(0, 1)
@@ -30,7 +24,7 @@ export const generateGrid = (colors) => {
       const seed = seeds[index];
       if (seed < 0.23) {
         cubes.push({
-          position: [x, y, random_num(-0.015, 0.015)],
+          position: [x, y, random_num(-0.0015, 0.0015)],
           scale: 0.99,
           color: random_choice(colors),
           rotation: [
@@ -56,24 +50,6 @@ export const generateGrid = (colors) => {
     }
   }
   return { cubes: cubes, spheres: spheres, booleans: booleans };
-};
-
-export const Material = ({ color }) => {
-  const roughnessMap = useTexture(concrete);
-  return (
-    <meshPhysicalMaterial
-      envMapIntensity={0.9}
-      metalness={0.7}
-      bumpMap={roughnessMap}
-      bumpScale={0.9}
-      sheen={0.5}
-      sheenColor={color}
-      sheenRoughness={0.9}
-      roughnessMap={roughnessMap}
-      iridescenceMap={roughnessMap}
-      color={color}
-    />
-  );
 };
 
 const Grid = () => {
@@ -135,14 +111,14 @@ const Grid = () => {
         <Center position={0}>
           <group>
             <Instances limit={cubes.length}>
-              <Material />
+              <PhysicalMaterial />
               <boxGeometry />
               {cubes.map(({ color, ...cube }, i) => {
                 return <Cube key={i} color={color} {...cube} />;
               })}
             </Instances>
             <Instances limit={spheres.length}>
-              <Material />
+              <PhysicalMaterial />
               <sphereGeometry args={[0.5, 64, 64]} />
               {spheres.map(({ color, ...sphere }, i) => {
                 return <Sphere key={i} color={color} {...sphere} />;
@@ -176,7 +152,7 @@ const Grid = () => {
                       cubeBelow={cubeBelow}
                       booleanAbove={booleanAbove}
                       booleanBelow={booleanBelow}
-                      material={<Material />}
+                      material={<PhysicalMaterial />}
                     />
                   );
                 }

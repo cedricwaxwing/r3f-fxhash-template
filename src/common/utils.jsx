@@ -86,3 +86,47 @@ export const getNoiseColors = (colors) => {
     colorD: shuffledColors[3],
   };
 };
+
+export function blendColors(color1, color2, blendFactor = 0.5) {
+  const color1RGB = hexToRGB(color1);
+  const color2RGB = hexToRGB(color2);
+
+  const blendedRGB = {
+    r: Math.round(mix(color1RGB.r, color2RGB.r, blendFactor)),
+    g: Math.round(mix(color1RGB.g, color2RGB.g, blendFactor)),
+    b: Math.round(mix(color1RGB.b, color2RGB.b, blendFactor)),
+  };
+
+  return rgbToHex(blendedRGB.r, blendedRGB.g, blendedRGB.b);
+}
+
+function hexToRGB(hex) {
+  let r = 0,
+    g = 0,
+    b = 0;
+
+  if (hex.length === 4) {
+    r = parseInt(hex[1] + hex[1], 16);
+    g = parseInt(hex[2] + hex[2], 16);
+    b = parseInt(hex[3] + hex[3], 16);
+  } else if (hex.length === 7) {
+    r = parseInt(hex.substring(1, 3), 16);
+    g = parseInt(hex.substring(3, 5), 16);
+    b = parseInt(hex.substring(5, 7), 16);
+  }
+
+  return { r, g, b };
+}
+
+function mix(value1, value2, factor) {
+  return value1 * (1 - factor) + value2 * factor;
+}
+
+function componentToHex(c) {
+  const hex = c.toString(16);
+  return hex.length === 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}

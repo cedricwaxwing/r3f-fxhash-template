@@ -7,9 +7,12 @@ import {
   random_num,
 } from "../common/utils";
 import { useFeatures } from "../common/FeaturesProvider";
-import { Material } from "./Grid";
-import { Cone, MeshTransmissionMaterial, useTexture } from "@react-three/drei";
-import roughnessTexture from "../assets/textures/TCom_GenericBrickSurface_New_4K_roughness.webp";
+import { Cone } from "@react-three/drei";
+import {
+  MetalMaterial,
+  PhysicalMaterial,
+  TransmissiveMaterial,
+} from "./Materials";
 
 const positionMapping = (position) => {
   const positions = {
@@ -106,7 +109,6 @@ const BooleanObject = ({
 }) => {
   const { theme } = useFeatures();
   const { cuts, pieces } = generateShapeConfig(theme.colors);
-  const texture = useTexture(roughnessTexture);
 
   const {
     cutTopLeft,
@@ -137,6 +139,7 @@ const BooleanObject = ({
   ];
 
   const showCone = topEmpty || bottomEmpty;
+  // const coneBelow = true;
 
   return (
     <group position={position} scale={scale}>
@@ -144,13 +147,13 @@ const BooleanObject = ({
       {(sphereAbove || booleanAbove) && !topEmpty && (
         <mesh castShadow receiveShadow position-y={0.5}>
           <cylinderGeometry args={[0.5, 0.5, 0.025, 64, 1]} />
-          <Material color={random_choice(theme.colors)} />
+          <PhysicalMaterial color={random_choice(theme.colors)} />
         </mesh>
       )}
       {(sphereBelow || booleanBelow) && !bottomEmpty && (
         <mesh castShadow receiveShadow position-y={-0.5}>
           <cylinderGeometry args={[0.5, 0.5, 0.025, 64, 1]} />
-          <Material color={random_choice(theme.colors)} />
+          <PhysicalMaterial color={random_choice(theme.colors)} />
         </mesh>
       )}
       <group>
@@ -161,7 +164,7 @@ const BooleanObject = ({
               position-y={topEmpty ? 0.25 : -0.25}
               rotation-x={bottomEmpty && Math.PI}
             >
-              <Material color={random_choice(theme.colors)} />
+              <PhysicalMaterial color={random_choice(theme.colors)} />
             </Cone>
           </>
         ) : (
@@ -171,7 +174,7 @@ const BooleanObject = ({
               return (
                 <mesh castShadow receiveShadow key={i}>
                   <torusGeometry args={[radius, tube, 16, 100]} />
-                  <Material color={random_choice(theme.colors)} />
+                  <PhysicalMaterial color={random_choice(theme.colors)} />
                 </mesh>
               );
             })}
@@ -179,7 +182,7 @@ const BooleanObject = ({
         )}
         {!showCone && (
           <mesh castShadow receiveShadow>
-            <Material color="white" />
+            <PhysicalMaterial color="white" />
             <Geometry>
               <EmptyBase />
               <Addition position-x={-0.45}>
@@ -205,9 +208,6 @@ const BooleanObject = ({
       {/* Sphere */}
       {pieces &&
         pieces.map((piece, i) => {
-          {
-            seeds[i] > 0.2 && console.log("glass");
-          }
           return (
             <mesh castShadow receiveShadow key={i}>
               <Geometry>
@@ -220,40 +220,19 @@ const BooleanObject = ({
                 >
                   <boxGeometry
                     args={[
-                      seeds[i] < 0.2 ? 0.99 : 1,
-                      seeds[i] < 0.2 ? 0.99 : 1,
+                      seeds[i] < 0.2 ? 0.9999 : 1,
+                      seeds[i] < 0.2 ? 0.9999 : 1,
                       1,
                     ]}
                   />
                 </Intersection>
               </Geometry>
               {seeds[i] < 0.2 ? (
-                <MeshTransmissionMaterial
-                  thickness={0.25}
-                  distortion={1}
-                  roughness={0.1}
-                  backside
-                  backsideThickness={0.3}
-                  backsideResolution={4096}
-                  iridescence={2}
-                  iridescenceMap={texture}
-                />
+                <TransmissiveMaterial />
               ) : seeds[i] < 0.21 ? (
-                <meshPhysicalMaterial
-                  metalness={1}
-                  roughness={0.29}
-                  bumpMap={texture}
-                  bumpScale={0.4}
-                  sheen={0.5}
-                  sheenColor={piece.color}
-                  sheenRoughness={0.9}
-                  iridescenceMap={texture}
-                  envMapIntensity={0.5}
-                  reflectivity={2}
-                  color={piece.color}
-                />
+                <MetalMaterial color={piece.color} />
               ) : (
-                <Material color={piece.color} />
+                <PhysicalMaterial color={piece.color} />
               )}
             </mesh>
           );

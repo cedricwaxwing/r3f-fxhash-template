@@ -4,16 +4,10 @@ import { random_choice, brightness } from "./utils";
 import { generateGrid } from "../Experience/Grid";
 
 const themes = {
-  // "Celestial Spectrum": {
-  //   background: ["#d2dfec", "#b8d2ed"],
-  //   primary: "#3498db",
-  //   lighting: ["#eaecd2", "#fbf7e0"],
-  //   colors: ["#e74c3c", "#f1c40f", "#2ecc71", "#3498db", "#e67e22"],
-  // },
   Minimal: {
-    background: ["#d2dfec", "#b8d2ed"],
-    primary: "#3498db",
+    background: "#828ae3",
     lighting: ["#eaecd2", "#fbf7e0"],
+    hills: "#646679",
     colors: ["#ebebeb", "#a3d5bb", "#b7bbeb"],
   },
 };
