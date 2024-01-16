@@ -32,9 +32,12 @@ const generateShapeConfig = (colors) => {
     });
   };
 
+  let iterationCount = 0;
   do {
     generatePieces();
-  } while (Object.values(cuts).filter(cutInfo => cutInfo.cut).length === 4);
+    iterationCount++;
+  } while (Object.values(cuts).filter(cutInfo => cutInfo.cut).length === 4 && iterationCount < 10);
+
 
   return { cuts, pieces };
 };
