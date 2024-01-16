@@ -1,6 +1,20 @@
 import concrete from "../assets/textures/TCom_GenericBrickSurface_New_4K_roughness.webp";
 import { MeshTransmissionMaterial, useTexture } from "@react-three/drei";
 
+export const TubeMaterial = ({ color }) => {
+  const texture = useTexture(concrete);
+  return (
+    <meshPhysicalMaterial
+      envMapIntensity={1.3}
+      sheen={2}
+      sheenColor={color}
+      sheenRoughness={0.2}
+      clearcoat={0.5}
+      color={color}
+    />
+  );
+};
+
 export const PhysicalMaterial = ({ color }) => {
   const texture = useTexture(concrete);
   return (

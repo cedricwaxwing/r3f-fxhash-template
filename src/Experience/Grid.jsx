@@ -19,7 +19,7 @@ export const generateGrid = (colors) => {
   const cubes = [];
   const spheres = [];
   const booleans = [];
-  columns = random_int(3, 4);
+  columns = random_int(4, 5);
 
   const seeds = Array.from({ length: Math.pow(columns, 2) }, () =>
     random_num(0, 1)

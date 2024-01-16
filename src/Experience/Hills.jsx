@@ -3,20 +3,22 @@ import { useMemo } from "react";
 import { createNoise2D } from "simplex-noise";
 import { useFeatures } from "../common/FeaturesProvider";
 import { Gradient, LayerMaterial, Noise } from "lamina";
-import { blendColors } from "../common/utils";
+import { blendColors, mapValue } from "../common/utils";
 
 const Hills = ({
   numPoints = 800,
   width = 45,
   maxHeight = 5,
   position,
-  intensity = 0.5,
+  // intensity = 0.5,
   easingPoint = 0.2,
 }) => {
   const simplexMacro = createNoise2D();
   const simplexMed = createNoise2D();
   const simplexMicro = createNoise2D();
-  const { theme } = useFeatures();
+  const { theme, envRotation, timeOfDay } = useFeatures();
+
+  const intensity = mapValue(position[2], -35, -60, 0, 1);
 
   const easing = (x, threshold) => {
     if (x < threshold) {
@@ -36,7 +38,8 @@ const Hills = ({
       const z = 0;
       let yMacro = simplexMacro(x / 30, 0) * (intensity * 3);
       let yMed = simplexMed(x / 5, 0) * (intensity * 0.8);
-      let yMicro = simplexMicro(x * 3, 0) * 0.09;
+      let yMicro =
+        simplexMicro(x * 3, 0) * mapValue(intensity, 0, 0.8, 0.25, 0);
 
       let easingFactor = easing(i / numPoints, easingPoint);
 
@@ -75,26 +78,13 @@ const Hills = ({
 
   return (
     <mesh position={position} geometry={hillsGeometry}>
-      {/* <meshBasicMaterial color={theme.hills} /> */}
-      <LayerMaterial lighting="standard">
-        <Gradient
-          colorA={theme.hills}
-          colorB={blendColors("#000000", theme.hills)}
-          axes="y"
-          start={maxHeight * 2}
-          end={0}
-        />
-        <Noise
-          colorA="#000"
-          colorB="#fff"
-          colorC="#666"
-          colorD="#eee"
-          mode="overlay"
-          alpha={1}
-          scale={0.1}
-          type="simplex"
-        />
-      </LayerMaterial>
+      <meshBasicMaterial
+        color={blendColors(
+          timeOfDay[envRotation].hills,
+          timeOfDay[envRotation].fog,
+          intensity
+        )}
+      />
     </mesh>
   );
 };

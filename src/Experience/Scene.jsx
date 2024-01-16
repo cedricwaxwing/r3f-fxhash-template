@@ -17,7 +17,7 @@ import { Color } from "three";
 import { BlendFunction, SSAOEffect } from "postprocessing";
 
 export default function Scene() {
-  const { theme, lighting } = useFeatures();
+  const { timeOfDay, envRotation, time, lighting } = useFeatures();
   const { viewport } = useThree();
   const groundY = -(viewport.height / 2) * 0.8;
 
@@ -28,15 +28,21 @@ export default function Scene() {
         <Hills
           position={[-30, groundY, -55]}
           maxHeight={6}
-          width={70}
-          intensity={0.8}
+          width={60}
+          intensity={0.6}
         />
         <Hills
-          position={[-22, groundY, -40]}
-          maxHeight={6}
+          position={[-47, groundY, -42]}
+          maxHeight={9}
+          width={60}
+          intensity={0.4}
+        />
+        <Hills
+          position={[-22, groundY, -37]}
+          maxHeight={4}
           width={30}
           intensity={0.5}
-          easingPoint={0.8}
+          easingPoint={0.5}
         />
         <Hills
           position={[-26, groundY, -35]}
@@ -46,7 +52,7 @@ export default function Scene() {
         />
         <Water
           position={[0, groundY, -10]}
-          waterColor={new Color(theme.primary)}
+          waterColor={new Color(timeOfDay[envRotation].background)}
           sunColor={new Color(lighting)}
           fog
           distortionScale={2}
@@ -57,11 +63,14 @@ export default function Scene() {
         <DepthOfField
           worldFocusDistance={10}
           worldFocusRange={10}
-          bokehScale={3}
+          bokehScale={6}
           resolutionScale={1}
         />
         <ToneMapping blendFunction={BlendFunction.SOFT_LIGHT} whitePoint={2} />
-        <BrightnessContrast brightness={-0.02} contrast={0.2} />
+        <BrightnessContrast
+          brightness={time === "day" ? -0.05 : -0.02}
+          contrast={time === "day" ? 0.15 : 0.1}
+        />
         <SSAO />
         <Vignette opacity={0.6} />
       </EffectComposer>

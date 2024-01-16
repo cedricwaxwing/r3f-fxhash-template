@@ -14,7 +14,7 @@ import { RGBELoader } from "three-stdlib";
 import { useMemo } from "react";
 
 const Env = ({ groundY }) => {
-  const { theme, lighting, envRotation, envIntensity } = useFeatures();
+  const { timeOfDay, lighting, envRotation, envIntensity } = useFeatures();
   const environmentTexture = useLoader(RGBELoader, environmentFile);
 
   const position = useMemo(() => {
@@ -41,14 +41,6 @@ const Env = ({ groundY }) => {
     return [x, y, z];
   }, [envRotation]);
 
-  console.log(
-    envRotation,
-    envRotation + Math.PI,
-    -0.1 + Math.PI,
-    -2.4 + Math.PI,
-    position
-  );
-
   return (
     <>
       <directionalLight
@@ -61,12 +53,8 @@ const Env = ({ groundY }) => {
       >
         <orthographicCamera attach="shadow-camera" args={[-21, 21, -21, 21]} />
       </directionalLight>
-      <fog
-        attach="fog"
-        args={[blendColors(theme.background, "#9cafc0", envIntensity), 15, 75]}
-      />
-      <Environment background>
-        <color attach="background" args={[theme.background]} />
+      <Environment background blur={0.06} resolution={4096}>
+        <color attach="background" args={[timeOfDay[envRotation].background]} />
         <Sphere scale={100} rotation={[0, envRotation, 0]}>
           <meshBasicMaterial
             map={environmentTexture}

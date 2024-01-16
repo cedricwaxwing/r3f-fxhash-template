@@ -12,6 +12,7 @@ import {
   MetalMaterial,
   PhysicalMaterial,
   TransmissiveMaterial,
+  TubeMaterial,
 } from "./Materials";
 
 const positionMapping = (position) => {
@@ -137,7 +138,7 @@ const BooleanObject = ({
     cutBottomLeft: cuts[2],
     cutBottomRight: cuts[3],
     rings: random_int(1, 6),
-    tube: random_num(0.005, 0.02),
+    tube: random_num(0.005, 0.015),
   };
 
   const hasCuts = cuts.some((cut) => cut);
@@ -190,7 +191,7 @@ const BooleanObject = ({
               return (
                 <mesh castShadow receiveShadow key={i}>
                   <torusGeometry args={[radius, tube, 16, 100]} />
-                  <PhysicalMaterial color={random_choice(theme.colors)} />
+                  <TubeMaterial color={random_choice(theme.colors)} />
                 </mesh>
               );
             })}
@@ -198,7 +199,7 @@ const BooleanObject = ({
         )}
         {!showCone && (
           <mesh castShadow receiveShadow>
-            <PhysicalMaterial color="white" />
+            <TubeMaterial color="white" />
             <Geometry>
               <EmptyBase />
               <Addition position-x={-0.45}>
