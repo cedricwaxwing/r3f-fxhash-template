@@ -50,7 +50,6 @@ const FeaturesProvider = ({ children }) => {
       theme: themes[choice],
       lighting: lighting,
       grid: grid,
-      name: choice,
       envRotation: activeTime.rotation,
       envIntensity: activeTime.intensity,
       time: activeTime.time,
