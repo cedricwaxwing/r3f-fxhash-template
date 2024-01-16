@@ -14,10 +14,10 @@ import {
   Vignette,
 } from "@react-three/postprocessing";
 import { Color } from "three";
-import { BlendFunction, SSAOEffect } from "postprocessing";
+import { BlendFunction } from "postprocessing";
 
 export default function Scene() {
-  const { timeOfDay, envRotation, time, lighting } = useFeatures();
+  const { timeOfDay, time, lighting } = useFeatures();
   const { viewport } = useThree();
   const groundY = -(viewport.height / 2) * 0.8;
 
@@ -52,7 +52,7 @@ export default function Scene() {
         />
         <Water
           position={[0, groundY, -10]}
-          waterColor={new Color(timeOfDay[envRotation].background)}
+          waterColor={new Color(timeOfDay.background)}
           sunColor={new Color(lighting)}
           fog
           distortionScale={2}

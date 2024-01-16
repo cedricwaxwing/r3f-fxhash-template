@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { useMemo } from "react";
 import { createNoise2D } from "simplex-noise";
 import { useFeatures } from "../common/FeaturesProvider";
-import { Gradient, LayerMaterial, Noise } from "lamina";
 import { blendColors, mapValue } from "../common/utils";
 
 const Hills = ({
@@ -10,13 +9,12 @@ const Hills = ({
   width = 45,
   maxHeight = 5,
   position,
-  // intensity = 0.5,
   easingPoint = 0.2,
 }) => {
   const simplexMacro = createNoise2D();
   const simplexMed = createNoise2D();
   const simplexMicro = createNoise2D();
-  const { theme, envRotation, timeOfDay } = useFeatures();
+  const { timeOfDay } = useFeatures();
 
   const intensity = mapValue(position[2], -35, -60, 0, 1);
 
@@ -79,11 +77,7 @@ const Hills = ({
   return (
     <mesh position={position} geometry={hillsGeometry}>
       <meshBasicMaterial
-        color={blendColors(
-          timeOfDay[envRotation].hills,
-          timeOfDay[envRotation].fog,
-          intensity
-        )}
+        color={blendColors(timeOfDay.hills, timeOfDay.fog, intensity)}
       />
     </mesh>
   );

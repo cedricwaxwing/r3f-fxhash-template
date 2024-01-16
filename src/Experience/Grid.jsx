@@ -1,11 +1,4 @@
-import {
-  Center,
-  ContactShadows,
-  Cylinder,
-  Instance,
-  Instances,
-  Resize,
-} from "@react-three/drei";
+import { Center, Instance, Instances, Resize } from "@react-three/drei";
 import { useFeatures } from "../common/FeaturesProvider";
 import { random_choice, random_int, random_num } from "../common/utils";
 import { memo, useEffect, useRef, useState } from "react";

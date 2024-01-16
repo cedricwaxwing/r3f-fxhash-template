@@ -5,11 +5,9 @@ import {
   SoftShadows,
 } from "@react-three/drei";
 import { useFeatures } from "../common/FeaturesProvider";
-import { blendColors, mapValue, random_num } from "../common/utils";
 import { useLoader } from "@react-three/fiber";
 import environmentFile from "../assets/hdri/kloppenheim_06_puresky_2k.hdr";
 import { BackSide } from "three";
-import { useControls } from "leva";
 import { RGBELoader } from "three-stdlib";
 import { useMemo } from "react";
 
@@ -54,7 +52,7 @@ const Env = ({ groundY }) => {
         <orthographicCamera attach="shadow-camera" args={[-21, 21, -21, 21]} />
       </directionalLight>
       <Environment background blur={0.06} resolution={4096}>
-        <color attach="background" args={[timeOfDay[envRotation].background]} />
+        <color attach="background" args={[timeOfDay.background]} />
         <Sphere scale={100} rotation={[0, envRotation, 0]}>
           <meshBasicMaterial
             map={environmentTexture}
