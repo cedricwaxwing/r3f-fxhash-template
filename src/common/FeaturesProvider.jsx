@@ -1,7 +1,7 @@
 import { createContext, memo, useContext } from "react";
 import { registerFeatures } from "../fxhash";
-import { random_choice, brightness } from "./utils";
-import { generateGrid } from "../Experience/Grid";
+import { random_choice } from "./utils";
+import { generateGrid } from "../Experience/GridFactory";
 
 const themes = {
   Minimal: {
@@ -38,18 +38,15 @@ const timeOfDay = [
 
 const choice = random_choice(Object.keys(themes));
 const activeTime = random_choice(timeOfDay);
+const grid = generateGrid(themes[choice].colors);
 
 export const constants = () => {
-  const { cubes, spheres, booleans } = generateGrid(themes[choice].colors);
   const lighting = random_choice(themes[choice].lighting);
   return {
     theme: themes[choice],
     lighting: lighting,
-    lightingBrightness: brightness(lighting),
+    grid: grid,
     name: choice,
-    cubes: cubes,
-    spheres: spheres,
-    booleans: booleans,
     envRotation: activeTime.rotation,
     envIntensity: activeTime.intensity,
     time: activeTime.time,
