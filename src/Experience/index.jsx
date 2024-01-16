@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 
-// import { Perf } from "r3f-perf";
+import { Perf } from "r3f-perf";
 import Scene from "./Scene";
 import { memo, useRef } from "react";
 import { OrbitControls } from "@react-three/drei";
@@ -31,7 +31,7 @@ function Experience() {
         }}
       >
         <Scene canvasRef={canvasRef} />
-        {/* {process.env.NODE_ENV === "development" && <Perf />} */}
+        {process.env.NODE_ENV === "development" && <Perf />}
         <OrbitControls
           target={[0, 0, 0]}
           maxPolarAngle={Math.PI * 2}

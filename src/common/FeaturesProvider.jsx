@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo } from "react";
+import React, { createContext, useContext, useMemo } from "react";
 import { registerFeatures } from "../fxhash";
 import { random_choice } from "./utils";
 import { generateGrid } from "../Experience/GridFactory";
@@ -55,7 +55,7 @@ const FeaturesProvider = ({ children }) => {
       time: activeTime.time,
       timeOfDay: activeTime,
     };
-  }, [grid, choice, activeTime]);
+  }, [choice, grid, activeTime]);
 
   registerFeatures({
     theme: choice,

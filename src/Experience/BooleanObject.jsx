@@ -130,14 +130,8 @@ const BooleanObject = ({
                 <Base>
                   <sphereGeometry args={[0.5, 64, 64]} />
                 </Base>
-                <Intersection scale={[0.5, 0.5, 1]} position={piece.position}>
-                  <boxGeometry
-                    args={[
-                      piece.seed < 0.2 ? 0.9999 : 1,
-                      piece.seed < 0.2 ? 0.9999 : 1,
-                      1,
-                    ]}
-                  />
+                <Intersection position={piece.position}>
+                  <boxGeometry args={[piece.scale / 2, piece.scale / 2, 1]} />
                 </Intersection>
               </Geometry>
               {piece.seed < 0.2 ? (

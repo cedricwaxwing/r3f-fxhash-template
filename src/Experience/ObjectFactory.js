@@ -24,6 +24,7 @@ const generateShapeConfig = (colors) => {
         };
       } else {
         pieces.push({
+          scale: 0.999999,
           position: positionMapping(position),
           color: random_choice(colors),
           seed: random_num(0, 1),
@@ -47,7 +48,7 @@ export const createCube = (x, y, colors) => {
   return {
     type: 'cube',
     position: [x, y, random_num(-0.0015, 0.0015)],
-    scale: 0.99,
+    scale: 0.9999,
     color: random_choice(colors),
     rotation: [
       random_num(-0.015, 0.015),
@@ -61,7 +62,7 @@ export const createSphere = (x, y, colors) => {
   return {
     type: 'sphere',
     position: [x, y, random_num(-0.015, 0.015)],
-    scale: 0.99,
+    scale: 0.9999,
     color: random_choice(colors),
     rotation: random_num(0, Math.PI * 2),
   };

@@ -1,6 +1,6 @@
 import { Center, Instance, Instances, Resize } from "@react-three/drei";
 import { useFeatures } from "../common/FeaturesProvider";
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useMemo } from "react";
 import BooleanObject from "./BooleanObject";
 import { useThree } from "@react-three/fiber";
 import { PhysicalMaterial } from "./Materials";
@@ -8,18 +8,7 @@ import { PhysicalMaterial } from "./Materials";
 const Grid = () => {
   const { grid } = useFeatures();
   const { width, height } = useThree((state) => state.viewport);
-  const [vMin, setVmin] = useState(Math.min(width, height));
-  console.log(grid);
-
-  useEffect(() => {
-    setVmin(Math.min(height, width));
-    const handleResize = () => {
-      setVmin(Math.min(height, width));
-    };
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, [width, height]);
+  const vMin = useMemo(() => Math.min(width, height), [width, height]);
 
   const cubes = grid.filter((object) => object.type === "cube");
   const spheres = grid.filter((object) => object.type === "sphere");
@@ -37,7 +26,6 @@ const Grid = () => {
                 <Cube key={i} {...cube} />
               ))}
             </Instances>
-
             <Instances limit={spheres.length}>
               <PhysicalMaterial />
               <sphereGeometry args={[0.5, 64, 64]} />

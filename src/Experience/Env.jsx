@@ -10,6 +10,7 @@ import environmentFile from "../assets/hdri/kloppenheim_06_puresky_2k.hdr";
 import { BackSide } from "three";
 import { RGBELoader } from "three-stdlib";
 import { useMemo } from "react";
+import { blendColors } from "../common/utils";
 
 const Env = ({ groundY }) => {
   const { timeOfDay, lighting, envRotation, envIntensity } = useFeatures();
@@ -66,16 +67,14 @@ const Env = ({ groundY }) => {
       <SoftShadows size={25} focus={0.01} samples={10} />
       <ContactShadows
         position={[0, groundY + 0.001, 0]}
-        frames={2}
-        ambient={0.2}
-        radius={10}
+        radius={15}
         amount={4}
-        opacity={0.5}
+        opacity={0.8}
         scale={10}
-        blur={2}
+        blur={1}
         far={10}
         resolution={128}
-        color="#000"
+        color={blendColors("#000", timeOfDay.background)}
       />
     </>
   );

@@ -19,7 +19,7 @@ import { BlendFunction } from "postprocessing";
 export default function Scene() {
   const { timeOfDay, time, lighting } = useFeatures();
   const { viewport } = useThree();
-  const groundY = -(viewport.height / 2) * 0.8;
+  const groundY = -(viewport.height / 2) * 0.77;
 
   return (
     <>
